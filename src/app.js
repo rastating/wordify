@@ -2,8 +2,10 @@ const express = require('express');
 
 const app = express();
 
+const router = require('./routes');
+
 app.use(express.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => res.status(418).end('Server working!'));
+app.use(router);
 
 module.exports = app;
