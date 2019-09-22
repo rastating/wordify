@@ -8,6 +8,7 @@
 ## Dependencies
 
 - [Express](https://www.npmjs.com/package/express) - Minimalist web framework for node.js
+- [Dotenv](https://www.npmjs.com/package/dotenv) - Module that loads environment variables from `.env`
 
 **Development**:
 
@@ -27,10 +28,12 @@
 
    `yarn install` or `npm install`
 
-4. Start the development server:
+4. Fill in the `.env` file
+
+5. Start the development server:
 
    `yarn start:dev` or `npm run start:dev`
 
-5. Open `http://localhost:5500` in browser
+6. Open `http://localhost:5500` in browser
 
 <p align="center">Copyright 2019 &copy; Oleksii Habiiev</p>
