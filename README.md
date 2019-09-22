@@ -32,3 +32,5 @@
    `yarn start:dev` or `npm run start:dev`
 
 5. Open `http://localhost:5500` in browser
+
+<p align="center">Copyright 2019 &copy; Oleksii Habiiev</p>
