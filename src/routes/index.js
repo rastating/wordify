@@ -1,5 +1,5 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => res.status(418).end('Server working!'));
+router.get('/', (req, res) => res.render('home'));
 
 module.exports = router;

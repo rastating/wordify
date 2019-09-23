@@ -9,6 +9,8 @@
 
 - [Express](https://www.npmjs.com/package/express) - Minimalist web framework for node.js
 - [Dotenv](https://www.npmjs.com/package/dotenv) - Module that loads environment variables from `.env`
+- [Morgan](https://www.npmjs.com/package/morgan) - HTTP request logger
+- [Pug](https://www.npmjs.com/package/pug) - Templating engine for Node.js
 
 **Development**:
 
