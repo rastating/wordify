@@ -15,6 +15,9 @@
 **Development**:
 
 - [Nodemon](https://www.npmjs.com/package/nodemon) - Development server that automatically restarts when file changes in the directory are detected
+- [Prettier](https://www.npmjs.com/package/prettier) - Opinionated code formatter
+- [Eslint](https://www.npmjs.com/package/eslint) - Javascript linter
+- [eslint-config-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) - Airbnb style guide for eslint
 
 ## Starting in a development environment
 

@@ -9,7 +9,5 @@ const config = require('./config');
 const server = http
   .createServer(app)
   .listen(config.port, config.host, () =>
-    console.log(
-      `Server on ${server.address().address}:${server.address().port}`
-    )
+    console.log(`Server on ${server.address().address}:${server.address().port}`)
   );
