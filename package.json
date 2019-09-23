@@ -8,7 +8,7 @@
   "private": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/habiiev/express-blog"
+    "url": "https://github.com/habiiev/express-blog.git"
   },
   "scripts": {
     "start:dev": "nodemon ."

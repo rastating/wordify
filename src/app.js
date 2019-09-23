@@ -9,6 +9,7 @@ const config = require('./config');
 const router = require('./routes');
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, 'static')));
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
