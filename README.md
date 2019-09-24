@@ -11,6 +11,7 @@
 - [Dotenv](https://www.npmjs.com/package/dotenv) - Module that loads environment variables from `.env`
 - [Morgan](https://www.npmjs.com/package/morgan) - HTTP request logger
 - [Pug](https://www.npmjs.com/package/pug) - Templating engine for Node.js
+- [Mongoose](https://www.npmjs.com/package/mongoose) - MongoDB ODM
 
 **Development**:
 

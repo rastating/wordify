@@ -14,6 +14,20 @@ html(lang="en")
       title Express Blog
 
   body
+    .navigation
+      nav.navigation__nav
+        span.navigation__brand Express Blog
+        ul.navigation__list
+          li.navigation__item
+            a.navigation__link(href="/") Home
+          li.navigation__item
+            a.navigation__link(href="#") Categories
+          li.navigation__vl &nbsp;
+          li.navigation__item
+            a.navigation__link(href="#") Login
+          li.navigation__item
+            a.navigation__link(href="#") Sign up
+
     main
       block body
     
