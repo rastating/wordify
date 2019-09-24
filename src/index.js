@@ -7,17 +7,15 @@ require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 
 const config = require('./config');
 
+mongoose.connect(config.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+if (config.env === 'development') mongoose.set('debug', true);
+
+require('./models/Article');
+
 const app = require('./app');
 
-const server = http.createServer(app);
-
-mongoose
-  .connect(config.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() =>
-    server.listen(config.port, config.host, () =>
-      console.log(`Server on ${server.address().address}:${server.address().port}`)
-    )
-  )
-  .catch(err => {
-    console.error(err);
-  });
+const server = http
+  .createServer(app)
+  .listen(config.port, config.host, () =>
+    console.log(`Server on ${server.address().address}:${server.address().port}`)
+  );

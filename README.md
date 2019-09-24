@@ -12,6 +12,8 @@
 - [Morgan](https://www.npmjs.com/package/morgan) - HTTP request logger
 - [Pug](https://www.npmjs.com/package/pug) - Templating engine for Node.js
 - [Mongoose](https://www.npmjs.com/package/mongoose) - MongoDB ODM
+- [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) - Pre-save validation for unique fields within a Mongoose schema
+- [Slug](https://www.npmjs.com/package/slug) - Slugifies strings
 
 **Development**:
 
