@@ -6,10 +6,14 @@ block body
     .form__field
       label(for="title").form__label Title:
       input(type="text" name="title").form__input#title
-      small.form__helper Minimum 10 characters
+      if errors['title']
+        small.form__error= errors['title']
+
     
     .form__field
       label(for="content").form__label Content:
       textarea(name="content", cols="30", rows="10").form__textarea
+      if errors['content']
+        small.form__error= errors['content']
 
     button(type="submit").form__submit Create Article

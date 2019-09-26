@@ -19,13 +19,23 @@ router
   .route('/create')
   .get((req, res) => res.render('create'))
   .post((req, res, next) => {
-    // TODO: Article validation
+    // TODO: Proper article validation
     Article.create({ title: req.body.title, content: req.body.content })
       .then(article => {
         res.send(article);
       })
       .catch(err => {
-        return res.render('create', { error: err });
+        // Check for mongoose validation errors
+        if (err.name === 'ValidationError') {
+          // Transform the errors into the object of type { 'field name': 'error message' }
+          const errors = Object.keys(err.errors).reduce((e, key) => {
+            e[key] = err.errors[key].message;
+            return e;
+          }, {});
+          return res.render('create', { errors });
+        }
+
+        return next(err);
       });
   });
 
