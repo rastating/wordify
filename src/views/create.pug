@@ -1,0 +1,15 @@
+extends _layout.pug
+
+block body
+  h1 New Article
+  form(method="post").form
+    .form__field
+      label(for="title").form__label Title:
+      input(type="text" name="title").form__input#title
+      small.form__helper Minimum 10 characters
+    
+    .form__field
+      label(for="content").form__label Content:
+      textarea(name="content", cols="30", rows="10").form__textarea
+
+    button(type="submit").form__submit Create Article

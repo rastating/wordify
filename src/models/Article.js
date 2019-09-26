@@ -26,7 +26,9 @@ const ArticleSchema = new mongoose.Schema(
 
 ArticleSchema.methods.slugify = function() {
   const date = new Date();
-  this.slug = `${date.getFullYear().toString()}-${date.getMonth().toString()}-${slug(this.title)}`;
+  this.slug = `${date.getFullYear().toString()}-${date.getMonth().toString()}${(
+    Math.random() * 36 ** 6 || 0
+  ).toString()}-${slug(this.title)}`;
 };
 
 ArticleSchema.plugin(uniqueValidator, { message: 'is already taken' });

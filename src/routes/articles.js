@@ -5,6 +5,7 @@ const Article = mongoose.model('Article');
 
 router.route('/').get(async (req, res, next) => {
   Article.find({})
+    .sort('-createdAt')
     .exec()
     .then(articles => res.render('home', { articles, empty: Array.isArray(articles) && articles.length }))
     .catch(err => {
@@ -14,7 +15,21 @@ router.route('/').get(async (req, res, next) => {
     });
 });
 
-router.route('/articles/:articleSlug').get((req, res, next) => {
+router
+  .route('/create')
+  .get((req, res) => res.render('create'))
+  .post((req, res, next) => {
+    // TODO: Article validation
+    Article.create({ title: req.body.title, content: req.body.content })
+      .then(article => {
+        res.send(article);
+      })
+      .catch(err => {
+        return res.render('create', { error: err });
+      });
+  });
+
+router.route('/a/:articleSlug').get((req, res, next) => {
   Article.findOne({ slug: req.params.articleSlug })
     .then(article => {
       if (!article) {

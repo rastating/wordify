@@ -10,6 +10,7 @@ router.all('*', (req, res, next) => {
 
 // eslint-disable-next-line no-unused-vars
 router.use((err, req, res, next) => {
+  console.log(err.stack);
   res.status(err.status || 500).render('error', {
     status: err.status || 500,
     message: err.status && err.status < 500 ? err.message : 'Oops, Something went wrong!'
