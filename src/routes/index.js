@@ -2,12 +2,18 @@ const router = require('express').Router();
 
 router.use('/', require('./articles'));
 
-router.get('/error', (req, res, next) => next(Error('Test error')));
+router.all('*', (req, res, next) => {
+  const error = new Error('Page not found');
+  error.status = 404;
+  next(error);
+});
 
-router.all('*', (req, res) => res.status(404).render('notFound', { title: 'Page Not Found' }));
-
-router.use((err, req, res, next) =>
-  res.status(err.status || 500).render('error', { status: err.status || 500, message: err.message })
-);
+// eslint-disable-next-line no-unused-vars
+router.use((err, req, res, next) => {
+  res.status(err.status || 500).render('error', {
+    status: err.status || 500,
+    message: err.status && err.status < 500 ? err.message : 'Oops, Something went wrong!'
+  });
+});
 
 module.exports = router;
