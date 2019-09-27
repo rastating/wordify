@@ -4,6 +4,23 @@ const { check, validationResult } = require('express-validator');
 
 const Article = mongoose.model('Article');
 
+router.param('articleSlug', (req, res, next, slug) => {
+  Article.findOne({ slug })
+    .then(article => {
+      if (!article) {
+        const error = new Error('Article was not found');
+        error.status = 404;
+        next(error);
+      }
+
+      req.article = article;
+      next();
+    })
+    .catch(err => {
+      next(new Error(err));
+    });
+});
+
 router.route('/').get((req, res, next) => {
   Article.find({})
     .sort('-createdAt')
@@ -67,23 +84,9 @@ router
 
 router
   .route('/a/:articleSlug')
-  .get((req, res, next) => {
-    Article.findOne({ slug: req.params.articleSlug })
-      .then(article => {
-        if (!article) {
-          const error = new Error('Article was not found');
-          error.status = 404;
-          next(error);
-        }
-
-        res.render('article', { article, title: article.title });
-      })
-      .catch(err => {
-        next(new Error(err));
-      });
-  })
+  .get((req, res) => res.render('article', { article: req.article, title: req.article.title }))
   .delete((req, res, next) => {
-    Article.deleteOne({ slug: req.params.articleSlug })
+    Article.deleteOne({ slug: req.article.slug })
       .then(() => res.redirect('/'))
       .catch(err => next(err));
   });
