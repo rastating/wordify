@@ -15,6 +15,7 @@
 - [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) - Pre-save validation for unique fields within a Mongoose schema
 - [Slug](https://www.npmjs.com/package/slug) - Slugifies strings
 - [Express-validator](https://www.npmjs.com/package/express-validator) - express middleware for [validator](https://www.npmjs.com/package/validator)
+- [Method-override](https://www.npmjs.com/package/method-override) - module that allows me to use PUT and DELETE methods from client side
 
 **Development**:
 

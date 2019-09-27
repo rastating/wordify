@@ -2,6 +2,7 @@ const path = require('path');
 
 const express = require('express');
 const morgan = require('morgan');
+const methodOverride = require('method-override');
 
 const app = express();
 
@@ -10,6 +11,8 @@ const router = require('./routes');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
+
+app.use(methodOverride('_method'));
 
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
