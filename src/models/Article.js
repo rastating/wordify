@@ -7,6 +7,7 @@ const ArticleSchema = new mongoose.Schema(
     slug: {
       type: String,
       lowercase: true,
+      required: true,
       unique: true
     },
     title: {

@@ -17,7 +17,7 @@ router.route('/').get(async (req, res, next) => {
 
 router
   .route('/create')
-  .get((req, res) => res.render('create'))
+  .get((req, res) => res.render('create', { title: 'New Article' }))
   .post((req, res, next) => {
     // TODO: Proper article validation
     Article.create({ title: req.body.title, content: req.body.content })

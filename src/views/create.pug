@@ -6,14 +6,14 @@ block body
     .form__field
       label(for="title").form__label Title:
       input(type="text" name="title").form__input#title
-      if errors['title']
-        small.form__error= errors['title']
+      if errors && errors.title
+        small.form__error= errors.title
 
     
     .form__field
       label(for="content").form__label Content:
       textarea(name="content", cols="30", rows="10").form__textarea
-      if errors['content']
-        small.form__error= errors['content']
+      if errors && errors.content
+        small.form__error= errors.content
 
     button(type="submit").form__submit Create Article
