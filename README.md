@@ -14,6 +14,7 @@
 - [Mongoose](https://www.npmjs.com/package/mongoose) - MongoDB ODM
 - [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) - Pre-save validation for unique fields within a Mongoose schema
 - [Slug](https://www.npmjs.com/package/slug) - Slugifies strings
+- [Express-validator](https://www.npmjs.com/package/express-validator) - express middleware for [validator](https://www.npmjs.com/package/validator)
 
 **Development**:
 
