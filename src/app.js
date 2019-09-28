@@ -3,11 +3,23 @@ const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const methodOverride = require('method-override');
+const expressSession = require('express-session');
+const cookieParser = require('cookie-parser');
 
 const app = express();
 
 const config = require('./config');
 const router = require('./routes');
+
+app.use(cookieParser());
+app.use(
+  expressSession({
+    secret: config.sessionSecret,
+    cookie: { maxAge: 60000 },
+    resave: false,
+    saveUninitialized: false
+  })
+);
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));

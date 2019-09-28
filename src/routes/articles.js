@@ -65,7 +65,7 @@ router
         });
 
       Article.create({ title: req.body.title, content: req.body.content })
-        .then(article => res.send(article))
+        .then(article => res.redirect(`/a/${article.slug}`))
         .catch(err => {
           // Check for mongoose validation errors
           if (err.name === 'ValidationError') {
