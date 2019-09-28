@@ -149,7 +149,7 @@ router
         .save()
         .then(article => {
           req.flash('info', 'Article successfully updated!');
-          res.redirect(`/a/${req.article.slug}`);
+          res.redirect(`/a/${article.slug}`);
         })
         .catch(err => {
           // Check for mongoose validation errors

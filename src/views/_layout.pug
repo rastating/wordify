@@ -30,9 +30,9 @@ html(lang="en")
             a.navigation__link(href="#") Sign up
 
 
-    if messages.info
-      .message.info
-        span= messages.info
+    .messages
+      if messages.info
+        span.message.message--info #{messages.info} #[span.message__close &Cross;]
 
     main.main
       block body
@@ -41,3 +41,5 @@ html(lang="en")
       p.footer__text
         | Copyright 2019 &copy;&nbsp;
         a(href="https://github.com/habiiev").footer__link Oleksii Habiiev
+    
+    script(src="/js/script.js")
