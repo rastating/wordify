@@ -52,7 +52,7 @@ router
 
     // eslint-disable-next-line consistent-return
     (req, res, next) => {
-      // Get validation erros after express-validator validation
+      // Get validation errors after express-validator validation
       const errors = validationResult(req);
       if (!errors.isEmpty())
         // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
