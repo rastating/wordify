@@ -6,5 +6,7 @@ block body
       input(type="hidden" name="_method" value="DELETE")
       input(type="submit", value="Delete Article").article__delete-button
     
+    a(href="/a/" + article.slug + "/edit") Edit Article
+
     h2= article.title
     p= article.content

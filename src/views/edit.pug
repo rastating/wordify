@@ -1,0 +1,22 @@
+extends _layout.pug
+
+block body
+  h1 Edit Article `#{article.title}`
+
+  form(action="/a/" + article.slug + "/edit?_method=PUT" method="POST").form
+    input(type="hidden" name="_method" value="PUT")
+    
+    .form__field
+      label(for="title").form__label Title:
+      input(type="text", name="title", value=article.title).form__input#title
+      if errors && errors.title
+        small.form__error= errors.title
+
+    
+    .form__field
+      label(for="content").form__label Content:
+      textarea(name="content", cols="30", rows="10").form__textarea= article.content
+      if errors && errors.content
+        small.form__error= errors.content
+
+    button(type="submit").form__submit Save Article

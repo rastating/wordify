@@ -103,4 +103,72 @@ router
       .catch(next);
   });
 
+router
+  .route('/a/:articleSlug/edit')
+  .get((req, res) =>
+    res.render('edit', {
+      article: req.article,
+      title: `Edit Article: ${req.article.title}`
+    })
+  )
+  .put(
+    // Sanitize and validate data
+    autoSanitizer.routeUnsafe,
+    [
+      check('title')
+        .trim()
+        .isLength({ min: 10, max: 128 })
+        .withMessage('Title must be between 10 and 128 characters'),
+
+      check('content')
+        .trim()
+        .isLength({ min: 32 })
+        .withMessage('Article content must be at least 32 characters long')
+    ],
+    (req, res, next) => {
+      req.article.title = req.body.title;
+      req.article.content = req.body.content;
+
+      // Get validation errors after express-validator validation
+      const errors = validationResult(req);
+      if (!errors.isEmpty())
+        // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
+        return res.render('edit', {
+          title: `Edit Article: ${req.article.title}`,
+          errors: errors.errors.reduce((r, value) => {
+            // eslint-disable-next-line no-param-reassign
+            r[value.param] = value.msg;
+            return r;
+          }, {}),
+          article: req.article
+        });
+
+      req.article.slugify();
+
+      req.article
+        .save()
+        .then(article => {
+          req.flash('info', 'Article successfully updated!');
+          res.redirect(`/a/${req.article.slug}`);
+        })
+        .catch(err => {
+          // Check for mongoose validation errors
+          if (err.name === 'ValidationError') {
+            // Transform the errors into the object of type { 'field name': 'error message' }
+            const mErrors = Object.keys(err.errors).reduce((e, key) => {
+              e[key] = err.errors[key].message;
+              return e;
+            }, {});
+            return res.render('edit', {
+              title: `Edit Article: ${req.article.title}`,
+              errors: mErrors,
+              article: req.article
+            });
+          }
+
+          return next(err);
+        });
+    }
+  );
+
 module.exports = router;
