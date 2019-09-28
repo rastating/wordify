@@ -65,7 +65,10 @@ router
         });
 
       Article.create({ title: req.body.title, content: req.body.content })
-        .then(article => res.redirect(`/a/${article.slug}`))
+        .then(article => {
+          req.flash('info', 'Article created!');
+          res.redirect(`/a/${article.slug}`);
+        })
         .catch(err => {
           // Check for mongoose validation errors
           if (err.name === 'ValidationError') {
@@ -87,7 +90,10 @@ router
   .get((req, res) => res.render('article', { article: req.article, title: req.article.title }))
   .delete((req, res, next) => {
     Article.deleteOne({ slug: req.article.slug })
-      .then(() => res.redirect('/'))
+      .then(() => {
+        req.flash('info', 'Article has been successfully deleted!');
+        res.redirect('/');
+      })
       .catch(err => next(err));
   });
 

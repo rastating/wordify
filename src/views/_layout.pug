@@ -29,6 +29,11 @@ html(lang="en")
           li.navigation__item
             a.navigation__link(href="#") Sign up
 
+
+    if messages.info
+      .message.info
+        span= messages.info
+
     main
       block body
     

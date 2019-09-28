@@ -18,6 +18,7 @@
 - [Method-override](https://www.npmjs.com/package/method-override) - module that allows me to use PUT and DELETE methods from client side
 - [Express-session](https://www.npmjs.com/package/express-session) - session middleware
 - [Cookie-parser](https://www.npmjs.com/package/cookie-parser) - parses cookie headers
+- [Express-flash](https://www.npmjs.com/package/express-flash) - flash messages middleware
 
 **Development**:
 

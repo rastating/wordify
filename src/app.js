@@ -5,6 +5,7 @@ const morgan = require('morgan');
 const methodOverride = require('method-override');
 const expressSession = require('express-session');
 const cookieParser = require('cookie-parser');
+const flash = require('express-flash');
 
 const app = express();
 
@@ -20,6 +21,8 @@ app.use(
     saveUninitialized: false
   })
 );
+
+app.use(flash());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
