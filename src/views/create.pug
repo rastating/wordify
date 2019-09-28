@@ -5,14 +5,14 @@ block body
   form(method="post").form
     .form__field
       label(for="title").form__label Title:
-      input(type="text" name="title").form__input#title
+      input(type="text", name="title", value=articleTitle).form__input#title
       if errors && errors.title
         small.form__error= errors.title
 
     
     .form__field
       label(for="content").form__label Content:
-      textarea(name="content", cols="30", rows="10").form__textarea
+      textarea(name="content", cols="30", rows="10").form__textarea= articleContent
       if errors && errors.content
         small.form__error= errors.content
 

@@ -37,14 +37,12 @@ router
       check('title')
         .trim()
         .isLength({ min: 10, max: 128 })
-        .withMessage('Title must be between 10 and 128 characters')
-        .escape(),
+        .withMessage('Title must be between 10 and 128 characters'),
 
       check('content')
         .trim()
         .isLength({ min: 32 })
         .withMessage('Article content must be at least 32 characters long')
-        .escape()
     ],
 
     // eslint-disable-next-line consistent-return
@@ -54,11 +52,14 @@ router
       if (!errors.isEmpty())
         // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
         return res.render('create', {
+          title: 'New Article',
           errors: errors.errors.reduce((r, value) => {
             // eslint-disable-next-line no-param-reassign
             r[value.param] = value.msg;
             return r;
-          }, {})
+          }, {}),
+          articleTitle: req.body.title,
+          articleContent: req.body.content
         });
 
       Article.create({ title: req.body.title, content: req.body.content })
@@ -74,7 +75,12 @@ router
               e[key] = err.errors[key].message;
               return e;
             }, {});
-            return res.render('create', { errors: mErrors });
+            return res.render('create', {
+              title: 'New Article',
+              errors: mErrors,
+              articleTitle: req.body.title,
+              articleContent: req.body.content
+            });
           }
 
           return next(err);
