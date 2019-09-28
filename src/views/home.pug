@@ -1,11 +1,15 @@
 extends _layout.pug
 
 block body
-  if empty
-    each article in articles
-      article.article
-        h2.article__title
-          a(href="/a/" + article.slug).article__link= article.title
+  if !empty
+    .articles
+      each article in articles
+        a(href="/a/" + article.slug).articles__article
+          - var date = new Date(article.createdAt)
+          .articles__header
+            h2.articles__title= article.title
+            span.articles__date= date.toDateString()
+          p.articles__content #{article.content.length <= 100 ? article.content : `${article.content.substr(0, 100)}...`}
   else
     h2 No articles were found
   

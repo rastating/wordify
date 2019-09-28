@@ -26,7 +26,7 @@ router.param('articleSlug', (req, res, next, slug) => {
 router.route('/').get((req, res, next) => {
   Article.find({})
     .sort('-createdAt')
-    .then(articles => res.render('home', { articles, empty: Array.isArray(articles) && articles.length }))
+    .then(articles => res.render('home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
     .catch(next);
 });
 

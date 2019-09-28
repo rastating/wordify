@@ -1,5 +1,6 @@
 :root {
-  --font-color: rgb(24, 23, 23);
+  --font-color: #fff;
+  --background-color: #353941;
 }
 
 *,
@@ -20,9 +21,9 @@ body {
   line-height: 1.7;
   box-sizing: border-box;
   position: relative;
-
+  padding: 1rem;
   color: var(--font-color);
-  background-color: #fdfafa;
+  background-color: var(--background-color);
 }
 
 .navigation {
@@ -53,7 +54,7 @@ body {
 
 .navigation__vl {
   height: 50%;
-  border-left: 1px solid #ddd;
+  border-left: 1px solid var(--font-color);
   position: relative;
   top: 1.3rem;
   margin: 0 2rem;
@@ -71,4 +72,92 @@ body {
 
 .navigation__link:hover {
   transform: translateY(-2px);
+}
+
+.main {
+  min-height: 80vh;
+  height: 100%;
+}
+
+.articles {
+  width: 90vw;
+  margin: 0 auto;
+  display: flex;
+  flex-flow: row wrap;
+  align-content: space-between;
+  /* justify-content: center; */
+}
+
+.articles__article {
+  display: block;
+  padding: 2rem;
+  width: 45%;
+  min-width: 30rem;
+  margin: 2rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+  transition: all 0.2s;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  background-color: var(--font-color);
+}
+
+.articles__article:nth-child(odd) {
+  margin-right: 2rem;
+}
+
+.articles__article:hover {
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 1rem 2rem rgba(0 0, 0, 0.5);
+}
+
+.articles__article:active {
+  transform: scale(0.95) translate(0);
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.8);
+}
+
+.articles__article:link,
+.articles__article:visited {
+  color: var(--background-color);
+  text-decoration: none;
+}
+
+.articles__header {
+  border-bottom: #ddd 1px solid;
+  margin-bottom: 1rem;
+  padding-bottom: 4px;
+  display: table;
+  content: '';
+  clear: both;
+  width: 100%;
+}
+
+.articles__title {
+  font-size: 2rem;
+  float: left;
+}
+
+.articles__date {
+  font-size: 1.4rem;
+  display: block;
+  float: right;
+}
+
+.footer__text {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.footer__link:link,
+.footer__link:visited {
+  color: var(--font-color);
+}
+
+@media only screen and (max-width: 900px) {
+  .articles {
+    flex-direction: column;
+  }
+  .articles__article {
+    width: 100%;
+  }
 }
