@@ -2,12 +2,14 @@ const router = require('express').Router();
 
 router.use('/', require('./articles'));
 
+// 404 handler
 router.all('*', (req, res, next) => {
   const error = new Error('Page not found');
   error.status = 404;
   next(error);
 });
 
+// Express error handler
 // eslint-disable-next-line no-unused-vars
 router.use((err, req, res, next) => {
   if (!(err.status < 500)) console.log(err.stack);

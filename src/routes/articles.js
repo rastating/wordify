@@ -4,6 +4,7 @@ const { check, validationResult } = require('express-validator');
 
 const Article = mongoose.model('Article');
 
+// Preload article in routes that use :articleSlug to req.article
 router.param('articleSlug', (req, res, next, slug) => {
   Article.findOne({ slug })
     .then(article => {
@@ -25,11 +26,7 @@ router.route('/').get((req, res, next) => {
   Article.find({})
     .sort('-createdAt')
     .then(articles => res.render('home', { articles, empty: Array.isArray(articles) && articles.length }))
-    .catch(err => {
-      const error = new Error(err);
-      error.status = 500;
-      next(error);
-    });
+    .catch(next);
 });
 
 router
@@ -94,7 +91,7 @@ router
         req.flash('info', 'Article has been successfully deleted!');
         res.redirect('/');
       })
-      .catch(err => next(err));
+      .catch(next);
   });
 
 module.exports = router;

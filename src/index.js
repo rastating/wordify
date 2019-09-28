@@ -4,9 +4,17 @@ const mongoose = require('mongoose');
 
 const config = require('./config');
 
-mongoose.connect(config.dbUrl, { useNewUrlParser: true, useUnifiedTopology: true });
+// Connect to Mongo and get rid of deprecation warnings
+mongoose.connect(config.dbUrl, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useCreateIndex: true,
+  useFindAndModify: false
+});
+
 if (config.env === 'development') mongoose.set('debug', true);
 
+// Load in the models so we can use mongoose.model('Model name') to get the model
 require('./models/Article');
 
 const app = require('./app');
