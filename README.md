@@ -14,11 +14,12 @@
 - [Mongoose](https://www.npmjs.com/package/mongoose) - MongoDB ODM
 - [Mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) - Pre-save validation for unique fields within a Mongoose schema
 - [Slug](https://www.npmjs.com/package/slug) - Slugifies strings
-- [Express-validator](https://www.npmjs.com/package/express-validator) - express middleware for [validator](https://www.npmjs.com/package/validator)
-- [Method-override](https://www.npmjs.com/package/method-override) - module that allows me to use PUT and DELETE methods from client side
-- [Express-session](https://www.npmjs.com/package/express-session) - session middleware
-- [Cookie-parser](https://www.npmjs.com/package/cookie-parser) - parses cookie headers
-- [Express-flash](https://www.npmjs.com/package/express-flash) - flash messages middleware
+- [Express-validator](https://www.npmjs.com/package/express-validator) - Express middleware for [validator](https://www.npmjs.com/package/validator)
+- [Method-override](https://www.npmjs.com/package/method-override) - Module that allows me to use PUT and DELETE methods from client side
+- [Express-session](https://www.npmjs.com/package/express-session) - Session middleware
+- [Cookie-parser](https://www.npmjs.com/package/cookie-parser) - Parses cookie headers
+- [Express-flash](https://www.npmjs.com/package/express-flash) - Flash messages middleware
+- [Express-autosanitizer](https://www.npmjs.com/package/express-autosanitizer) - data sanitization
 
 **Development**:
 

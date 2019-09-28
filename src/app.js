@@ -1,11 +1,11 @@
 const path = require('path');
 
-const express = require('express');
+const flash = require('express-flash');
 const morgan = require('morgan');
+const express = require('express');
+const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const expressSession = require('express-session');
-const cookieParser = require('cookie-parser');
-const flash = require('express-flash');
 
 const app = express();
 

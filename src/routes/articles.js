@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const mongoose = require('mongoose');
+const autoSanitizer = require('express-autosanitizer');
 const { check, validationResult } = require('express-validator');
 
 const Article = mongoose.model('Article');
@@ -33,6 +34,8 @@ router
   .route('/create')
   .get((req, res) => res.render('create', { title: 'New Article' }))
   .post(
+    // Sanitize and validate data
+    autoSanitizer.routeUnsafe,
     [
       check('title')
         .trim()
