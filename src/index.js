@@ -16,6 +16,7 @@ if (config.env === 'development') mongoose.set('debug', true);
 
 // Load in the models so we can use mongoose.model('Model name') to get the model
 require('./models/Article');
+require('./models/User');
 
 const app = require('./app');
 
