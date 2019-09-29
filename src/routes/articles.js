@@ -26,13 +26,13 @@ router.param('articleSlug', (req, res, next, slug) => {
 router.route('/').get((req, res, next) => {
   Article.find({})
     .sort('-createdAt')
-    .then(articles => res.render('home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
+    .then(articles => res.render('articles/home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
     .catch(next);
 });
 
 router
   .route('/create')
-  .get((req, res) => res.render('create', { title: 'New Article' }))
+  .get((req, res) => res.render('articles/create', { title: 'New Article' }))
   .post(
     // Sanitize and validate data
     autoSanitizer.routeUnsafe,
@@ -48,13 +48,12 @@ router
         .withMessage('Article content must be at least 32 characters long')
     ],
 
-    // eslint-disable-next-line consistent-return
     (req, res, next) => {
       // Get validation errors after express-validator validation
       const errors = validationResult(req);
       if (!errors.isEmpty())
         // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
-        return res.render('create', {
+        return res.render('articles/create', {
           title: 'New Article',
           errors: errors.errors.reduce((r, value) => {
             // eslint-disable-next-line no-param-reassign
@@ -78,7 +77,7 @@ router
               e[key] = err.errors[key].message;
               return e;
             }, {});
-            return res.render('create', {
+            return res.render('articles/create', {
               title: 'New Article',
               errors: mErrors,
               articleTitle: req.body.title,
@@ -93,7 +92,7 @@ router
 
 router
   .route('/a/:articleSlug')
-  .get((req, res) => res.render('article', { article: req.article, title: req.article.title }))
+  .get((req, res) => res.render('articles/article', { article: req.article, title: req.article.title }))
   .delete((req, res, next) => {
     Article.deleteOne({ slug: req.article.slug })
       .then(() => {
@@ -106,7 +105,7 @@ router
 router
   .route('/a/:articleSlug/edit')
   .get((req, res) =>
-    res.render('edit', {
+    res.render('articles/edit', {
       article: req.article,
       title: `Edit Article: ${req.article.title}`
     })
@@ -133,7 +132,7 @@ router
       const errors = validationResult(req);
       if (!errors.isEmpty())
         // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
-        return res.render('edit', {
+        return res.render('articles/edit', {
           title: `Edit Article: ${req.article.title}`,
           errors: errors.errors.reduce((r, value) => {
             // eslint-disable-next-line no-param-reassign
@@ -159,7 +158,7 @@ router
               e[key] = err.errors[key].message;
               return e;
             }, {});
-            return res.render('edit', {
+            return res.render('articles/edit', {
               title: `Edit Article: ${req.article.title}`,
               errors: mErrors,
               article: req.article
