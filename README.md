@@ -20,6 +20,7 @@
 - [Cookie-parser](https://www.npmjs.com/package/cookie-parser) - Parses cookie headers
 - [Express-flash](https://www.npmjs.com/package/express-flash) - Flash messages middleware
 - [Express-autosanitizer](https://www.npmjs.com/package/express-autosanitizer) - data sanitization
+- [Bcryptjs](https://www.npmjs.com/package/bcryptjs) - library for hashing passwords
 
 **Development**:
 
