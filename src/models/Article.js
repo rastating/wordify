@@ -20,7 +20,8 @@ const ArticleSchema = new mongoose.Schema(
       type: String,
       required: true,
       minlength: 32
-    }
+    },
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   },
   { timestamps: true }
 );
