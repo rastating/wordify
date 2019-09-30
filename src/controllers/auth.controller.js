@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
 
+const mongooseError = require('../utils/mongooseErrorHandler');
+
 const User = mongoose.model('User');
 
 // User validation middleware
@@ -43,7 +45,7 @@ exports.createUserForm = (req, res) => {
 };
 
 // POST route for creating user
-exports.createUser = (req, res /* , next */) => {
+exports.createUser = (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty())
     return res.render('auth/signup', {
@@ -61,10 +63,16 @@ exports.createUser = (req, res /* , next */) => {
       req.flash('info', 'You are registered. You can login now!');
       res.redirect('/auth/login');
     })
-    .catch(err => {
-      // TODO: Mongoose error handling
-      res.send(err);
-    });
+    .catch(err =>
+      mongooseError(err, next, mErrors =>
+        res.render('auth/signup', {
+          title: 'Sign up',
+          errors: mErrors,
+          username: req.body.username,
+          email: req.body.email
+        })
+      )
+    );
 };
 
 // Render login user form

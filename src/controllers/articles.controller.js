@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
 
+const mongooseError = require('../utils/mongooseErrorHandler');
+
 const Article = mongoose.model('Article');
 
 // Preload article in routes that have slug in their url
@@ -68,24 +70,16 @@ exports.createArticle = (req, res, next) => {
       req.flash('info', 'Article created!');
       res.redirect(`/a/${article.slug}`);
     })
-    .catch(err => {
-      // Check for mongoose validation errors
-      if (err.name === 'ValidationError') {
-        // Transform the errors into the object of type { 'field name': 'error message' }
-        const mErrors = Object.keys(err.errors).reduce((e, key) => {
-          e[key] = err.errors[key].message;
-          return e;
-        }, {});
-        return res.render('articles/create', {
+    .catch(err =>
+      mongooseError(err, next, mErrors =>
+        res.render('articles/create', {
           title: 'New Article',
           errors: mErrors,
           articleTitle: req.body.title,
           articleContent: req.body.content
-        });
-      }
-
-      return next(err);
-    });
+        })
+      )
+    );
 };
 
 // Render a single article
@@ -137,21 +131,13 @@ exports.editArticle = (req, res, next) => {
       req.flash('info', 'Article successfully updated!');
       res.redirect(`/a/${article.slug}`);
     })
-    .catch(err => {
-      // Check for mongoose validation errors
-      if (err.name === 'ValidationError') {
-        // Transform the errors into the object of type { 'field name': 'error message' }
-        const mErrors = Object.keys(err.errors).reduce((e, key) => {
-          e[key] = err.errors[key].message;
-          return e;
-        }, {});
-        return res.render('articles/edit', {
+    .catch(err =>
+      mongooseError(err, next, mErrors =>
+        res.render('articles/edit', {
           title: `Edit Article: ${req.article.title}`,
           errors: mErrors,
           article: req.article
-        });
-      }
-
-      return next(err);
-    });
+        })
+      )
+    );
 };
