@@ -20,14 +20,20 @@ html(lang="en")
         ul.navigation__list
           li.navigation__item
             a.navigation__link(href="/") Home
-          li.navigation__item
-            a.navigation__link(href="/create") New Article
+          if authenticated
+            li.navigation__item
+              a.navigation__link(href="/create") New Article
 
           li.navigation__vl &nbsp;
-          li.navigation__item
-            a.navigation__link(href="/auth/login") Login
-          li.navigation__item
-            a.navigation__link(href="/auth/signup") Sign up
+          if authenticated
+            li.navigation__item
+              a.navigation__link(href="/auth/logout") Logout
+
+          else
+            li.navigation__item
+              a.navigation__link(href="/auth/login") Login
+            li.navigation__item
+              a.navigation__link(href="/auth/signup") Sign up
 
 
     .messages

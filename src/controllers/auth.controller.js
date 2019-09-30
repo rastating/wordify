@@ -81,6 +81,7 @@ exports.loginUserForm = (req, res) => {
   res.render('auth/login', { title: 'Login' });
 };
 
+// Login the user using passport
 exports.loginUser = (req, res, next) => {
   passport.authenticate('local', {
     successRedirect: '/profile',
@@ -88,4 +89,11 @@ exports.loginUser = (req, res, next) => {
     failureFlash: true,
     successFlash: 'Successfully logged in!'
   })(req, res, next);
+};
+
+// Logout user
+exports.logoutUser = (req, res) => {
+  req.logout();
+  req.flash('info', 'You have been logged out');
+  res.redirect('/');
 };

@@ -30,6 +30,12 @@ passportConfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+// Set global variable on response object to true if user is logged in
+app.use((req, res, next) => {
+  res.locals.authenticated = req.isAuthenticated();
+  next();
+});
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));
 

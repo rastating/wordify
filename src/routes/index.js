@@ -1,7 +1,7 @@
 const router = require('express').Router();
 
-router.use('/', require('./articles'));
-router.use('/auth', require('./auth'));
+router.use('/', require('./articles.routes'));
+router.use('/auth', require('./auth.routes'));
 
 // 404 handler
 router.all('*', (req, res, next) => {
