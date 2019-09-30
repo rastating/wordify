@@ -1,173 +1,25 @@
 const router = require('express').Router();
-const mongoose = require('mongoose');
 const autoSanitizer = require('express-autosanitizer');
-const { check, validationResult } = require('express-validator');
 
-const Article = mongoose.model('Article');
+const controller = require('../controllers/articles.controller');
 
-// Preload article in routes that use :articleSlug to req.article
-router.param('articleSlug', (req, res, next, slug) => {
-  Article.findOne({ slug })
-    .then(article => {
-      if (!article) {
-        const error = new Error('Article was not found');
-        error.status = 404;
-        next(error);
-      }
+router.param('articleSlug', controller.preLoadArticle);
 
-      req.article = article;
-      next();
-    })
-    .catch(err => {
-      next(new Error(err));
-    });
-});
-
-router.route('/').get((req, res, next) => {
-  Article.find({})
-    .sort('-createdAt')
-    .then(articles => res.render('articles/home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
-    .catch(next);
-});
+router.route('/').get(controller.getAllArticles);
 
 router
   .route('/create')
-  .get((req, res) => res.render('articles/create', { title: 'New Article' }))
-  .post(
-    // Sanitize and validate data
-    autoSanitizer.routeUnsafe,
-    [
-      check('title')
-        .trim()
-        .isLength({ min: 10, max: 128 })
-        .withMessage('Title must be between 10 and 128 characters'),
-
-      check('content')
-        .trim()
-        .isLength({ min: 32 })
-        .withMessage('Article content must be at least 32 characters long')
-    ],
-
-    (req, res, next) => {
-      // Get validation errors after express-validator validation
-      const errors = validationResult(req);
-      if (!errors.isEmpty())
-        // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
-        return res.render('articles/create', {
-          title: 'New Article',
-          errors: errors.errors.reduce((r, value) => {
-            // eslint-disable-next-line no-param-reassign
-            r[value.param] = value.msg;
-            return r;
-          }, {}),
-          articleTitle: req.body.title,
-          articleContent: req.body.content
-        });
-
-      Article.create({ title: req.body.title, content: req.body.content })
-        .then(article => {
-          req.flash('info', 'Article created!');
-          res.redirect(`/a/${article.slug}`);
-        })
-        .catch(err => {
-          // Check for mongoose validation errors
-          if (err.name === 'ValidationError') {
-            // Transform the errors into the object of type { 'field name': 'error message' }
-            const mErrors = Object.keys(err.errors).reduce((e, key) => {
-              e[key] = err.errors[key].message;
-              return e;
-            }, {});
-            return res.render('articles/create', {
-              title: 'New Article',
-              errors: mErrors,
-              articleTitle: req.body.title,
-              articleContent: req.body.content
-            });
-          }
-
-          return next(err);
-        });
-    }
-  );
+  .get(controller.createArticleForm)
+  .post(autoSanitizer.routeUnsafe, controller.validateArticle, controller.createArticle);
 
 router
   .route('/a/:articleSlug')
-  .get((req, res) => res.render('articles/article', { article: req.article, title: req.article.title }))
-  .delete((req, res, next) => {
-    Article.deleteOne({ slug: req.article.slug })
-      .then(() => {
-        req.flash('info', 'Article has been successfully deleted!');
-        res.redirect('/');
-      })
-      .catch(next);
-  });
+  .get(controller.getArticle)
+  .delete(controller.deleteArticle);
 
 router
   .route('/a/:articleSlug/edit')
-  .get((req, res) =>
-    res.render('articles/edit', {
-      article: req.article,
-      title: `Edit Article: ${req.article.title}`
-    })
-  )
-  .put(
-    // Sanitize and validate data
-    autoSanitizer.routeUnsafe,
-    [
-      check('title')
-        .trim()
-        .isLength({ min: 10, max: 128 })
-        .withMessage('Title must be between 10 and 128 characters'),
-
-      check('content')
-        .trim()
-        .isLength({ min: 32 })
-        .withMessage('Article content must be at least 32 characters long')
-    ],
-    (req, res, next) => {
-      req.article.title = req.body.title;
-      req.article.content = req.body.content;
-
-      // Get validation errors after express-validator validation
-      const errors = validationResult(req);
-      if (!errors.isEmpty())
-        // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
-        return res.render('articles/edit', {
-          title: `Edit Article: ${req.article.title}`,
-          errors: errors.errors.reduce((r, value) => {
-            // eslint-disable-next-line no-param-reassign
-            r[value.param] = value.msg;
-            return r;
-          }, {}),
-          article: req.article
-        });
-
-      req.article.slugify();
-
-      req.article
-        .save()
-        .then(article => {
-          req.flash('info', 'Article successfully updated!');
-          res.redirect(`/a/${article.slug}`);
-        })
-        .catch(err => {
-          // Check for mongoose validation errors
-          if (err.name === 'ValidationError') {
-            // Transform the errors into the object of type { 'field name': 'error message' }
-            const mErrors = Object.keys(err.errors).reduce((e, key) => {
-              e[key] = err.errors[key].message;
-              return e;
-            }, {});
-            return res.render('articles/edit', {
-              title: `Edit Article: ${req.article.title}`,
-              errors: mErrors,
-              article: req.article
-            });
-          }
-
-          return next(err);
-        });
-    }
-  );
+  .get(controller.editArticleForm)
+  .put(autoSanitizer.routeUnsafe, controller.validateArticle, controller.editArticle);
 
 module.exports = router;
