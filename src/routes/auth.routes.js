@@ -19,6 +19,6 @@ router
   .get(authMiddleware.redirectAuthenticated, controller.loginUserForm)
   .post(authMiddleware.redirectAuthenticated, controller.loginUser);
 
-router.get('/logout').get(authMiddleware.ensureAuthenticated, controller.logoutUser);
+router.route('/logout').get(authMiddleware.ensureAuthenticated, controller.logoutUser);
 
 module.exports = router;
