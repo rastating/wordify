@@ -1,0 +1,30 @@
+extends ../_layout.pug
+
+block body
+  h1 Sign up today!
+  form(method="post").form
+    .form__field
+      label(for="username").form__label Username:
+      input(type="text", name="username").form__input#username
+      if errors && errors.username
+        small.form__error= errors.username
+
+    .form__field
+      label(for="email").form__label Email:
+      input(type="email", name="email").form__input#email
+      if errors && errors.email
+        small.form__error= errors.email
+
+    .form__field
+      label(for="password").form__label Password:
+      input(type="password", name="password").form__input#password
+      if errors && errors.password
+        small.form__error= errors.password
+
+    .form__field
+      label(for="confirmPassword").form__label Confirm Password:
+      input(type="password", name="confirmPassword").form__input#confirmPassword
+      if errors && errors.confirmPassword
+        small.form__error= errors.confirmPassword
+
+    button(type="submit").form__submit Create Article
