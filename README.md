@@ -21,6 +21,8 @@
 - [Express-flash](https://www.npmjs.com/package/express-flash) - Flash messages middleware
 - [Express-autosanitizer](https://www.npmjs.com/package/express-autosanitizer) - data sanitization
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs) - library for hashing passwords
+- [Passport](https://www.npmjs.com/package/passport) - authentication middleware for node.js
+- [Passport-local](https://www.npmjs.com/package/passport-local) - passport strategy for authentication using username and password
 
 **Development**:
 

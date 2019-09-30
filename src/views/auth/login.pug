@@ -2,3 +2,13 @@ extends ../_layout.pug
 
 block body
   h1 Login
+  form(method="post").form
+    .form__field
+      label(for="username").form__label Username:
+      input(type="text", name="username", value=username).form__input#username
+
+    .form__field
+      label(for="password").form__label Password:
+      input(type="password", name="password").form__input#password
+
+    button(type="submit").form__submit Login

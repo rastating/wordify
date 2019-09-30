@@ -3,6 +3,7 @@ const path = require('path');
 const flash = require('express-flash');
 const morgan = require('morgan');
 const express = require('express');
+const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const expressSession = require('express-session');
@@ -11,6 +12,7 @@ const app = express();
 
 const config = require('./config');
 const router = require('./routes');
+const passportConfig = require('./config/passport');
 
 app.use(cookieParser());
 app.use(
@@ -23,6 +25,10 @@ app.use(
 );
 
 app.use(flash());
+
+passportConfig(passport);
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'static')));

@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const passport = require('passport');
 const { check, validationResult } = require('express-validator');
 
 const mongooseError = require('../utils/mongooseErrorHandler');
@@ -78,4 +79,13 @@ exports.createUser = (req, res, next) => {
 // Render login user form
 exports.loginUserForm = (req, res) => {
   res.render('auth/login', { title: 'Login' });
+};
+
+exports.loginUser = (req, res, next) => {
+  passport.authenticate('local', {
+    successRedirect: '/profile',
+    failureRedirect: '/auth/login',
+    failureFlash: true,
+    successFlash: 'Successfully logged in!'
+  })(req, res, next);
 };

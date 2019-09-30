@@ -33,8 +33,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "can't be blank"],
       minlength: 8,
-      maxlength: 128,
-      select: false
+      maxlength: 128
     }
   },
   { timestamps: true }

@@ -34,6 +34,12 @@ html(lang="en")
       if messages.info
         span.message.message--info #{messages.info} #[span.message__close &Cross;]
 
+      if messages.success
+        span.message.message--info #{messages.success} #[span.message__close &Cross;]
+
+      if messages.error != '' && messages.error
+        span.message.message--error #{messages.error} #[span.message__close &Cross;]
+
     main.main
       block body
     

@@ -104,6 +104,10 @@ body {
   border-left: 1rem solid #3c6f9c;
 }
 
+.message--error {
+  border-left: 1rem solid #cc0000;
+}
+
 @keyframes message-animation {
   0% {
     transform: translateX(10rem);

@@ -8,6 +8,9 @@ router
   .get(controller.createUserForm)
   .post(autoSanitizer.routeUnsafe, controller.validateUser, controller.createUser);
 
-router.route('/login').get(controller.loginUserForm);
+router
+  .route('/login')
+  .get(controller.loginUserForm)
+  .post(controller.loginUser);
 
 module.exports = router;
