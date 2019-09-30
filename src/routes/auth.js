@@ -16,7 +16,7 @@ router
         .isLength(5, 32)
         .withMessage('Username must be between 5 and 32 characters long')
         .matches(/^[a-zA-Z0-9_]+$/)
-        .withMessage('username must contain only letters numbers and underscores')
+        .withMessage('Username must contain only letters numbers and underscores')
         .custom(value =>
           User.findOne({ username: value }).then(user => {
             if (user) return Promise.reject('Username is already in use');
@@ -26,7 +26,12 @@ router
       check('email')
         .trim()
         .isEmail()
-        .withMessage('Please provide a valid email'),
+        .withMessage('Please provide a valid email')
+        .custom(value =>
+          User.findOne({ email: value }).then(user => {
+            if (user) return Promise.reject('User with email is already registered');
+          })
+        ),
 
       check('password')
         .isLength(8, 64)
@@ -37,11 +42,32 @@ router
         return true;
       })
     ],
+
     (req, res, next) => {
       const errors = validationResult(req);
-      if (!errors.isEmpty()) res.send(errors);
-      else res.send('Registered');
+      if (!errors.isEmpty())
+        return res.render('auth/signup', {
+          title: 'Sign up',
+          errors: errors.errors.reduce((r, value) => {
+            if (!r[value.param]) r[value.param] = value.msg;
+            return r;
+          }, {}),
+          username: req.body.username,
+          email: req.body.email
+        });
+
+      User.create({ username: req.body.username, email: req.body.email, password: req.body.password })
+        .then(user => {
+          req.flash('info', 'You are registered. You can login now!');
+          res.redirect('/auth/login');
+        })
+        .catch(err => {
+          // TODO: Mongoose error handling
+          res.send(err);
+        });
     }
   );
+
+router.route('/login').get((req, res) => res.render('auth/login', { title: 'Login' }));
 
 module.exports = router;

@@ -46,13 +46,12 @@ UserSchema.methods.validatePassword = function(password) {
 };
 
 UserSchema.pre('save', function(next) {
-  if (!this.isModified('password')) return next();
-  bcrypt
-    .genSalt(10)
-    .then(salt => bcrypt.hash(this.password, salt))
-    .then(hash => {
-      this.password = hash;
-    });
+  const user = this;
+  if (!user.isModified('password')) return next();
+  bcrypt.hash(user.password, 10).then(function(hash) {
+    user.password = hash;
+    next();
+  });
 });
 
 UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
