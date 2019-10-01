@@ -8,6 +8,7 @@ const Article = mongoose.model('Article');
 // Preload article in routes that have slug in their url
 exports.preLoadArticle = (req, res, next, slug) => {
   Article.findOne({ slug })
+    .populate('author')
     .then(article => {
       if (!article) {
         const error = new Error('Article was not found');
@@ -65,7 +66,7 @@ exports.createArticle = (req, res, next) => {
       articleContent: req.body.content
     });
 
-  Article.create({ title: req.body.title, content: req.body.content })
+  Article.create({ title: req.body.title, content: req.body.content, author: req.user })
     .then(article => {
       req.flash('info', 'Article created!');
       res.redirect(`/a/${article.slug}`);
@@ -89,24 +90,40 @@ exports.getArticle = (req, res) => {
 
 // Delete a single article
 exports.deleteArticle = (req, res, next) => {
-  Article.deleteOne({ slug: req.article.slug })
-    .then(() => {
-      req.flash('info', 'Article has been successfully deleted!');
-      res.redirect('/');
-    })
-    .catch(next);
+  if (req.article.author.id === req.user.id) {
+    req.article
+      .remove()
+      .then(() => {
+        req.flash('info', 'Article has been successfully deleted!');
+        res.redirect('/');
+      })
+      .catch(next);
+  } else {
+    req.flash('error', 'You cannot perform that action');
+    res.redirect('/');
+  }
 };
 
 // Render edit article form
 exports.editArticleForm = (req, res) => {
-  res.render('articles/edit', {
-    article: req.article,
-    title: `Edit Article: ${req.article.title}`
-  });
+  if (req.article.author.id === req.user.id)
+    res.render('articles/edit', {
+      article: req.article,
+      title: `Edit Article: ${req.article.title}`
+    });
+  else {
+    req.flash('error', 'You cannot perform that action');
+    res.redirect(`/a/${req.article.slug}`);
+  }
 };
 
 // PUT route for editing an article
 exports.editArticle = (req, res, next) => {
+  if (!req.article.author.id === req.user.id) {
+    req.flash('error', 'You cannot perform that action');
+    return res.redirect(`/a/${req.article.slug}`);
+  }
+
   req.article.title = req.body.title;
   req.article.content = req.body.content;
 
