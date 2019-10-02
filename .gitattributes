@@ -2,6 +2,6 @@
 
 yarn.lock -diff
 
-static/css/*
-static/js/*
-static/fonts/*
+static/css/*    linguist-vendored
+static/js/*     linguist-vendored
+static/fonts/*  linguist-vendored
