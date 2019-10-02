@@ -2,11 +2,12 @@ extends ../_layout.pug
 
 block body
   .article
-    form(action="/a/" + article.slug + "?_method=DELETE" method="POST")
-      input(type="hidden" name="_method" value="DELETE")
-      input(type="submit", value="Delete Article").article__delete-button
-    
-    a(href="/a/" + article.slug + "/edit") Edit Article
+    if user && user.id === article.author.id
+      form(action="/a/" + article.slug + "?_method=DELETE" method="POST")
+        input(type="hidden" name="_method" value="DELETE")
+        input(type="submit", value="Delete Article").article__delete-button
+      
+      a(href="/a/" + article.slug + "/edit") Edit Article
 
     h2= article.title
     p= article.content

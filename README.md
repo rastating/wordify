@@ -1,5 +1,5 @@
 <div align="center">
-  <h1 style="border: none;">Express Blog application</h1>
+  <h1 style="border: none;">Wordify</h1>
   <p>A simple small blog application built using Node / Express / MongoDB</p>
 </div>
 

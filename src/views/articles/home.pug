@@ -1,15 +1,71 @@
 extends ../_layout.pug
 
 block body
-  if !empty
-    .articles
-      each article in articles
-        a(href="/a/" + article.slug).articles__article
-          - var date = new Date(article.createdAt)
-          .articles__header
-            h2.articles__title= article.title
-            span.articles__date= date.toDateString()
-          p.articles__content #{article.content.length <= 100 ? article.content : `${article.content.substr(0, 100)}...`}
-  else
-    h2 No articles were found
-  
+  .container
+    if empty
+      .row
+        .col-md-6
+            h2.mb-4 Not posts available
+    else
+      .row
+        .col-md-6
+          h2.mb-4 Latest Posts
+      
+      .row.blog-entries
+        .col-md-12.col-lg-8.main-content
+          .row
+            each article in articles
+              - var date = new Date(article.createdAt)
+              .col-md-6
+                a(href="/a/" + article.slug, data-animate-effect="fadeIn").blog-entry.element-animate
+                  img(src="#", alt="Image placeholder")
+                  .blog-content-body
+                    .post-meta
+                      span.author.mr-2
+                        img(src="#", alt=article.author.username)
+                        |  #{article.author.username}
+                      | &bullet;
+
+                      span.mr-2= date.toDateString()
+                      | &bullet;
+
+                      span.ml-2
+                        span.fa.fa-comments
+                        | 3
+                    
+                    h2= article.title
+
+          .row.mt-5
+            .col-md-12.text-center
+              nav(aria-label="Page navigation").text-center
+                ul.pagination
+                  li.page-item.active
+                    a(href="#").page-link &lt;
+                  
+                  li.page-item
+                    a(href="#").page-link 1
+                  li.page-item
+                    a(href="#").page-link 2
+                  li.page-item
+                    a(href="#").page-link 3
+                  li.page-item
+                    a(href="#").page-link 4
+                  li.page-item
+                    a(href="#").page-link 5
+
+                  li.page-item
+                    a(href="#").page-link &gt;
+
+        include ../_components/sidebar
+
+  //- if !empty
+  //-   .articles
+  //-     each article in articles
+  //-       a(href="/a/" + article.slug).articles__article
+  //-         - var date = new Date(article.createdAt)
+  //-         .articles__header
+  //-           h2.articles__title= article.title
+  //-           span.articles__date= date.toDateString()
+  //-         p.articles__content #{article.content.length <= 100 ? article.content : `${article.content.substr(0, 100)}...`}
+  //- else
+  //-   h2 No articles were found

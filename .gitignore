@@ -2,3 +2,10 @@ node_modules/
 .vscode/
 
 .env
+
+*.jpg
+*.png
+*.txt
+*.pdf
+
+.DS_STORE

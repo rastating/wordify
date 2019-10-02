@@ -1,0 +1,7 @@
+* text=auto
+
+yarn.lock -diff
+
+static/css/*
+static/js/*
+static/fonts/*

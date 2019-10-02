@@ -40,6 +40,7 @@ exports.validateArticle = [
 // Return home page with all of the articles
 exports.getAllArticles = (req, res, next) => {
   Article.find({})
+    .populate('author')
     .sort('-createdAt')
     .then(articles => res.render('articles/home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
     .catch(next);
@@ -90,31 +91,31 @@ exports.getArticle = (req, res) => {
 
 // Delete a single article
 exports.deleteArticle = (req, res, next) => {
-  if (req.article.author.id === req.user.id) {
-    req.article
-      .remove()
-      .then(() => {
-        req.flash('info', 'Article has been successfully deleted!');
-        res.redirect('/');
-      })
-      .catch(next);
-  } else {
+  if (!req.article.author.id === req.user.id) {
     req.flash('error', 'You cannot perform that action');
-    res.redirect('/');
+    return res.redirect(`/a/${req.article.slug}`);
   }
+
+  req.article
+    .remove()
+    .then(() => {
+      req.flash('info', 'Article has been successfully deleted!');
+      res.redirect('/');
+    })
+    .catch(next);
 };
 
 // Render edit article form
 exports.editArticleForm = (req, res) => {
-  if (req.article.author.id === req.user.id)
-    res.render('articles/edit', {
-      article: req.article,
-      title: `Edit Article: ${req.article.title}`
-    });
-  else {
+  if (!req.article.author.id === req.user.id) {
     req.flash('error', 'You cannot perform that action');
-    res.redirect(`/a/${req.article.slug}`);
+    return res.redirect(`/a/${req.article.slug}`);
   }
+
+  res.render('articles/edit', {
+    article: req.article,
+    title: `Edit Article: ${req.article.title}`
+  });
 };
 
 // PUT route for editing an article

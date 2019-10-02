@@ -1,5 +1,5 @@
 {
-  "name": "express-blog",
+  "name": "wordify",
   "version": "0.1.1",
   "description": "A simple small blog application built using Node / Express / MongoDB",
   "main": "src/index.js",

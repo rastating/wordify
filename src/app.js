@@ -33,6 +33,7 @@ app.use(passport.session());
 // Set global variable on response object to true if user is logged in
 app.use((req, res, next) => {
   res.locals.authenticated = req.isAuthenticated();
+  res.locals.user = req.user;
   next();
 });
 

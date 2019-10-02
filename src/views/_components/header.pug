@@ -1,0 +1,41 @@
+header(role="banner")
+  .top-bar
+    .container
+      .row
+        .col-9.social
+          a(href="https://github.com/habiiev/express-blog", target="_blank")
+            span.fa.fa-github
+          a(href="https://www.linkedin.com/in/habiiev/", target="_blank")
+            span.fa.fa-linkedin-square
+        
+        .col-3.search-top
+          form(action="#").search-top-form
+            span.icon.fa.fa-search
+            input(type="text", placeholder="Search articles...")#s
+  
+  .container.logo-wrap
+    .row.pt-5
+      .col-12.text-center
+        a(href="#navbarMenu", data-toggle="collapse", role="button", aria-expanded="false", aria-controls="navbarMenu").absolute-toggle.d-block.d-md-none
+          span.burger-lines
+
+        h1.site-logo 
+          a(href="/") Wordify
+
+  nav.navbar.navbar-expand-md.navbar-light.bg-light
+    .container
+      #navbarMenu.collapse.navbar-collapse
+        ul.navbar-nav.mx-auto
+          li.nav-item
+            a(href="/").nav-link Home
+          
+          if authenticated
+            li.nav-item
+              a(href="/create").nav-link New Article
+            li.nav-item
+              a(href="/auth/logout").nav-link Logout
+          else
+            li.nav-item
+              a(href="/auth/login").nav-link Login
+            li.nav-item
+              a(href="/auth/signup").nav-link Sign up
