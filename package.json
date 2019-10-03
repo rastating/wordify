@@ -11,6 +11,7 @@
     "url": "https://github.com/habiiev/express-blog.git"
   },
   "scripts": {
+    "start": "node .",
     "start:dev": "nodemon ."
   },
   "dependencies": {
