@@ -1,6 +1,8 @@
 extends _layout.pug
 
 block body
-  .error-page
-    h1.error-page__code= status
-    h2.error-page__message= message
+  .container
+    .main-content.text-center
+      h1.error-page__code= status
+      h2.error-page__message= message
+      a(href="/").btn.btn-link Go to home page

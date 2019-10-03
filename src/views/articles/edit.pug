@@ -1,22 +1,34 @@
 extends ../_layout.pug
 
 block body
-  h1 Edit Article `#{article.title}`
-
-  form(action="/a/" + article.slug + "/edit?_method=PUT" method="POST").form
-    input(type="hidden" name="_method" value="PUT")
+  .container
+    .row.mb-4
+      .col-md-6
+        h1 Edit Article
     
-    .form__field
-      label(for="title").form__label Title:
-      input(type="text", name="title", value=article.title).form__input#title
-      if errors && errors.title
-        small.form__error= errors.title
+    .row.blog-entries
+      .col-md-12.col-lg-8.main-content
+        form(action="/a/" + article.slug + "/edit?_method=PUT", method="post")
+          input(type="hidden", name="_method", value="PUT")
 
-    
-    .form__field
-      label(for="content").form__label Content:
-      textarea(name="content", cols="30", rows="10").form__textarea= article.content
-      if errors && errors.content
-        small.form__error= errors.content
+          .row
+            .col-md-12.form-group
+              label(for="title") Title
+              input(type="text", name="title", value=article.title)#title.form-control
+              
+              if errors && errors.title
+                small= errors.title
 
-    button(type="submit").form__submit Save Article
+          .row
+            .col-md-12.form-group
+              label(for="content") Content
+              textarea(name="content", cols="30", rows="20")#content.form-control= article.content
+              
+              if errors && errors.content
+                small= errors.content
+
+          .row
+            .col-md-6.form-group
+              input(type="submit", value="Save Article").btn.btn-primary
+
+      include ../_components/sidebar

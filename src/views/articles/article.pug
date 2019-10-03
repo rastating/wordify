@@ -33,7 +33,7 @@ block body
           a(href="#").category.mb-5 Food
 
           .post-content-body
-            p= article.content
+            p !{article.content.replace(/\n/g, '<br>')}
           
           .pt-5
             p Categories: #[a(href="#") Food] &nbsp; Tags: #[a(href="#") #manilla]
@@ -68,15 +68,3 @@ block body
                     input(type="submit", value="Post Comment").btn.btn-primary
 
         include ../_components/sidebar
-
-//- block body
-//-   .article
-//-     if user && user.id === article.author.id
-//-       form(action="/a/" + article.slug + "?_method=DELETE" method="POST")
-//-         input(type="hidden" name="_method" value="DELETE")
-//-         input(type="submit", value="Delete Article").article__delete-button
-      
-//-       a(href="/a/" + article.slug + "/edit") Edit Article
-
-//-     h2= article.title
-//-     p= article.content

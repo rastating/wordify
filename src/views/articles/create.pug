@@ -20,7 +20,7 @@ block body
           .row
             .col-md-12.form-group
               label(for="content") Content
-              textarea(name="content", cols="30", rows="8")#content.form-control= articleContent
+              textarea(name="content", cols="30", rows="20")#content.form-control= articleContent
               
               if errors && errors.content
                 small= errors.content
@@ -30,21 +30,3 @@ block body
               input(type="submit", value="Create Article").btn.btn-primary
 
       include ../_components/sidebar
-
-//- block body
-//-   h1 New Article
-//-   form(method="post").form
-//-     .form__field
-//-       label(for="title").form__label Title:
-//-       input(type="text", name="title", value=articleTitle).form__input#title
-//-       if errors && errors.title
-//-         small.form__error= errors.title
-
-    
-//-     .form__field
-//-       label(for="content").form__label Content:
-//-       textarea(name="content", cols="30", rows="10").form__textarea= articleContent
-//-       if errors && errors.content
-//-         small.form__error= errors.content
-
-//-     button(type="submit").form__submit Create Article

@@ -57,15 +57,3 @@ block body
                     a(href="#").page-link &gt;
 
         include ../_components/sidebar
-
-  //- if !empty
-  //-   .articles
-  //-     each article in articles
-  //-       a(href="/a/" + article.slug).articles__article
-  //-         - var date = new Date(article.createdAt)
-  //-         .articles__header
-  //-           h2.articles__title= article.title
-  //-           span.articles__date= date.toDateString()
-  //-         p.articles__content #{article.content.length <= 100 ? article.content : `${article.content.substr(0, 100)}...`}
-  //- else
-  //-   h2 No articles were found
