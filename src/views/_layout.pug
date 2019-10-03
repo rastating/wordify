@@ -26,32 +26,30 @@ html(lang="en")
     .wrap
       include ./_components/header
   
+      .messages
+        if messages.info
+          span.message.message--info #{messages.info} #[span.message__close &Cross;]
+        if messages.success
+          span.message.message--info #{messages.success} #[span.message__close &Cross;]
+        if messages.error != '' && messages.error
+          span.message.message--error #{messages.error} #[span.message__close &Cross;]
+
       section.site-section
-        .messages
-          if messages.info
-            span.message.message--info #{messages.info} #[span.message__close &Cross;]
-
-          if messages.success
-            span.message.message--info #{messages.success} #[span.message__close &Cross;]
-
-          if messages.error != '' && messages.error
-            span.message.message--error #{messages.error} #[span.message__close &Cross;]
-
         block body
       
       include ./_components/footer
 
-    //- #loader.show.fullscreen
-    //-   svg(width="48px", height="48px").circular
-    //-     circle(cx="24", cy="24", r="22", fill="none", stroke-width="4", stroke="#eeeeee").path-bg
-    //-     circle(cx="24", cy="24", r="22", fill="none", stroke-width="4", stroke-miterlimit="10", stroke="#f4b214").path
+    #loader.show.fullscreen
+      svg(width="48px", height="48px").circular
+        circle(cx="24", cy="24", r="22", fill="none", stroke-width="4", stroke="#eeeeee").path-bg
+        circle(cx="24", cy="24", r="22", fill="none", stroke-width="4", stroke-miterlimit="10", stroke="#f4b214").path
 
-    script(src="js/jquery-3.2.1.min.js")
-    script(src="js/jquery-migrate-3.0.0.js")
-    script(src="js/popper.min.js")
-    script(src="js/bootstrap.min.js")
-    script(src="js/owl.carousel.min.js")
-    script(src="js/jquery.waypoints.min.js")
-    script(src="js/jquery.stellar.min.js")
+    script(src="/js/jquery-3.2.1.min.js")
+    script(src="/js/jquery-migrate-3.0.0.js")
+    script(src="/js/popper.min.js")
+    script(src="/js/bootstrap.min.js")
+    script(src="/js/owl.carousel.min.js")
+    script(src="/js/jquery.waypoints.min.js")
+    script(src="/js/jquery.stellar.min.js")
 
     script(src="/js/main.js")

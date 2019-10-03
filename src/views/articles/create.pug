@@ -1,19 +1,50 @@
 extends ../_layout.pug
 
 block body
-  h1 New Article
-  form(method="post").form
-    .form__field
-      label(for="title").form__label Title:
-      input(type="text", name="title", value=articleTitle).form__input#title
-      if errors && errors.title
-        small.form__error= errors.title
+  .container
+    .row.mb-4
+      .col-md-6
+        h1 New Article
+    
+    .row.blog-entries
+      .col-md-12.col-lg-8.main-content
+        form(method="post")
+          .row
+            .col-md-12.form-group
+              label(for="title") Title
+              input(type="text", name="title", value=articleTitle)#title.form-control
+              
+              if errors && errors.title
+                small= errors.title
+
+          .row
+            .col-md-12.form-group
+              label(for="content") Content
+              textarea(name="content", cols="30", rows="8")#content.form-control= articleContent
+              
+              if errors && errors.content
+                small= errors.content
+
+          .row
+            .col-md-6.form-group
+              input(type="submit", value="Create Article").btn.btn-primary
+
+      include ../_components/sidebar
+
+//- block body
+//-   h1 New Article
+//-   form(method="post").form
+//-     .form__field
+//-       label(for="title").form__label Title:
+//-       input(type="text", name="title", value=articleTitle).form__input#title
+//-       if errors && errors.title
+//-         small.form__error= errors.title
 
     
-    .form__field
-      label(for="content").form__label Content:
-      textarea(name="content", cols="30", rows="10").form__textarea= articleContent
-      if errors && errors.content
-        small.form__error= errors.content
+//-     .form__field
+//-       label(for="content").form__label Content:
+//-       textarea(name="content", cols="30", rows="10").form__textarea= articleContent
+//-       if errors && errors.content
+//-         small.form__error= errors.content
 
-    button(type="submit").form__submit Create Article
+//-     button(type="submit").form__submit Create Article

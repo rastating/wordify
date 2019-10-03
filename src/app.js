@@ -18,9 +18,8 @@ app.use(cookieParser());
 app.use(
   expressSession({
     secret: config.sessionSecret,
-    cookie: { maxAge: 60000 },
-    resave: false,
-    saveUninitialized: false
+    resave: true,
+    saveUninitialized: true
   })
 );
 

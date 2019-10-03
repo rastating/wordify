@@ -1,13 +1,82 @@
 extends ../_layout.pug
 
 block body
-  .article
-    if user && user.id === article.author.id
-      form(action="/a/" + article.slug + "?_method=DELETE" method="POST")
-        input(type="hidden" name="_method" value="DELETE")
-        input(type="submit", value="Delete Article").article__delete-button
-      
-      a(href="/a/" + article.slug + "/edit") Edit Article
+  .container.py-lg
+      .row.blog-entries.element-animate
+        .col-md-12.col-lg-8.main-content
+          img(src="#", alt="Blog Image").img-fluid.mb-5
+          .post-meta
+            .row
+              .col-md-8.col-sm-12
+                span.author.mr-2
+                  img(src="#", alt="Author image").mr-2
+                  | #{article.author.username} &bullet;
 
-    h2= article.title
-    p= article.content
+                span.mr-2= new Date(article.createdAt).toDateString()
+                | &bullet;
+
+                span.ml-2
+                  span.fa.fa-comments
+                  | &nbsp;3
+
+            
+              if authenticated && user.id === article.author.id
+                .col-md-4.col-sm-12
+                  span.row
+                    a(href="/a/" + article.slug + '/edit').col-sm-6.btn.btn-link Edit
+                    form(action="/a/" + article.slug + "?_method=DELETE", method="post").col-sm-6.row
+                      input(type="hidden" name="_method" value="DELETE")
+                      input(type="submit", value="Delete").btn.btn-link.col-sm-12
+          
+          h1.mb-4= article.title
+
+          a(href="#").category.mb-5 Food
+
+          .post-content-body
+            p= article.content
+          
+          .pt-5
+            p Categories: #[a(href="#") Food] &nbsp; Tags: #[a(href="#") #manilla]
+          
+          .pt-5
+            h3.mb-5 3 Comments
+            ul.comment-list
+              li.comment
+                .vcard
+                  img(src="#")
+                .comment-body
+                  h3 Jean Doe
+                  
+                  .meta January 9, 2018 at 2:21pm
+                  
+                  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, modi temporibus facere minima quis voluptas velit iusto, officiis at illum culpa aliquam dolore itaque magni adipisci sint. Velit, doloribus nam.
+
+                  //- p
+                  //-   a(href="#").reply.rounded Reply
+            
+            .comment-form-wrap.pt-5
+              h3 Leave a comment
+              if !authenticated
+                p Please #[a(href="/auth/login") login] to leave a comment
+              else
+                form(action="#" method="post").p-5.bg-light
+                  .form-group
+                    label(for="message") Message
+                    textarea(name="message", cols="30", rows="10")#message.form-control
+                  
+                  .form-group
+                    input(type="submit", value="Post Comment").btn.btn-primary
+
+        include ../_components/sidebar
+
+//- block body
+//-   .article
+//-     if user && user.id === article.author.id
+//-       form(action="/a/" + article.slug + "?_method=DELETE" method="POST")
+//-         input(type="hidden" name="_method" value="DELETE")
+//-         input(type="submit", value="Delete Article").article__delete-button
+      
+//-       a(href="/a/" + article.slug + "/edit") Edit Article
+
+//-     h2= article.title
+//-     p= article.content

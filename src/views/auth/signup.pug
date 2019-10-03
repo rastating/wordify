@@ -1,30 +1,45 @@
 extends ../_layout.pug
 
 block body
-  h1 Sign up today!
-  form(method="post").form
-    .form__field
-      label(for="username").form__label Username:
-      input(type="text", name="username", value=username).form__input#username
-      if errors && errors.username
-        small.form__error= errors.username
+  .container
+    .row.mb-4
+      .col-md-6
+        h1 Sign up
+    
+    .row.blog-entries
+      .col-md-12.col-lg-8.main-content
+        form(method="post")
+          .row
+            .col-md-12.form-group
+              label(for="username") Username
+              input(type="text", name="username", value=username)#username.form-control
+              
+              if errors && errors.username
+                small= errors.username
 
-    .form__field
-      label(for="email").form__label Email:
-      input(type="email", name="email", value=email).form__input#email
-      if errors && errors.email
-        small.form__error= errors.email
+            .col-md-12.form-group
+              label(for="Email") Email
+              input(type="email", name="email", value=email)#email.form-control
+              
+              if errors && errors.email
+                small= errors.email
 
-    .form__field
-      label(for="password").form__label Password:
-      input(type="password", name="password").form__input#password
-      if errors && errors.password
-        small.form__error= errors.password
+            .col-md-12.form-group
+              label(for="password") Password
+              input(type="password", name="password")#password.form-control
 
-    .form__field
-      label(for="confirmPassword").form__label Confirm Password:
-      input(type="password", name="confirmPassword").form__input#confirmPassword
-      if errors && errors.confirmPassword
-        small.form__error= errors.confirmPassword
+              if errors && errors.password
+                small= errors.password
 
-    button(type="submit").form__submit Sign up
+            .col-md-12.form-group
+              label(for="confirmPassword") Confirm Password
+              input(type="password", name="confirmPassword")#confirmPassword.form-control
+
+              if errors && errors.confirmPassword
+                small= errors.confirmPassword
+
+          .row
+            .col-md-6.form-group
+              input(type="submit", value="Signup").btn.btn-primary
+
+      include ../_components/sidebar
