@@ -20,8 +20,4 @@ require('./models/User');
 
 const app = require('./app');
 
-const server = http
-  .createServer(app)
-  .listen(config.port, config.host, () =>
-    console.log(`Server on ${server.address().address}:${server.address().port}`)
-  );
+const server = http.createServer(app).listen(config.port, () => console.log(`Server on port ${server.address().port}`));

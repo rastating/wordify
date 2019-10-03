@@ -4,9 +4,11 @@ const flash = require('express-flash');
 const morgan = require('morgan');
 const express = require('express');
 const passport = require('passport');
+const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
 const methodOverride = require('method-override');
 const expressSession = require('express-session');
+const MongoStore = require('connect-mongo')(expressSession);
 
 const app = express();
 
@@ -19,7 +21,8 @@ app.use(
   expressSession({
     secret: config.sessionSecret,
     resave: true,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 
