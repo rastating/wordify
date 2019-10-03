@@ -1,0 +1,24 @@
+{
+  "name": "Wordify",
+  "description": "A simple small blog application built using Node / Express / MongoDB",
+  "repository": "https://github.com/habiiev/wordify",
+  "logo": "https://i.imgur.com/nJfINPP.png",
+  "keywords": [
+    "node",
+    "express",
+    "mongodb",
+    "mongoose",
+    "yarn",
+    "blog",
+    "eslint",
+    "prettier",
+    "passport",
+    "bcryptjs",
+    "wordify"
+  ],
+  "env": {
+    "NODE_ENV": { "value": "production" },
+    "MONGO": { "generator": "secret" },
+    "SESSIONSECRET": { "generator": "secret" }
+  }
+}

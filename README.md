@@ -1,5 +1,6 @@
 <div align="center">
-  <h1 style="border: none;">Wordify</h1>
+  <img src="https://i.imgur.com/nJfINPP.png" alt="Wordify logo" height="100" width="300">
+
   <p>A simple small blog application built using Node / Express / MongoDB</p>
 </div>
 
@@ -52,5 +53,9 @@
    `yarn start:dev` or `npm run start:dev`
 
 6. Open `http://localhost:5500` in browser
+
+## Deploying to Heroku
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
 
 <p align="center">Copyright 2019 &copy; Oleksii Habiiev</p>
