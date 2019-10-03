@@ -2,7 +2,7 @@
   "name": "Wordify",
   "description": "A simple small blog application built using Node / Express / MongoDB",
   "repository": "https://github.com/habiiev/wordify",
-  "logo": "https://i.imgur.com/nJfINPP.png",
+  "logo": "https://i.imgur.com/NizsEx6.png",
   "keywords": [
     "node",
     "express",
@@ -18,7 +18,7 @@
   ],
   "env": {
     "NODE_ENV": { "value": "production" },
-    "MONGO": { "generator": "secret" },
+    "MONGO": { "value": "" },
     "SESSIONSECRET": { "generator": "secret" }
   }
 }

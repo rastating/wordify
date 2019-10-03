@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/nJfINPP.png" alt="Wordify logo" height="100" width="300">
+  <img src="https://i.imgur.com/KSugaI9.png" alt="Wordify logo" height="100" width="400">
 
   <p>A simple small blog application built using Node / Express / MongoDB</p>
 </div>
