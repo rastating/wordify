@@ -3,8 +3,6 @@ node_modules/
 
 .env
 
-*.jpg
-*.png
 *.txt
 *.pdf
 
