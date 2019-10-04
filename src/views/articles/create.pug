@@ -8,7 +8,7 @@ block body
     
     .row.blog-entries
       .col-md-12.col-lg-8.main-content
-        form(method="post")
+        form(method="post", enctype="multipart/form-data")
           .row
             .col-md-12.form-group
               label(for="title") Title
@@ -24,6 +24,14 @@ block body
               
               if errors && errors.content
                 small= errors.content
+          
+          .row
+            .col-md-12.form-group
+              label(for="image") Image&nbsp;
+              input(type="file", name="image").form-control
+
+              if errors && errors.file
+                small= errors.file
 
           .row
             .col-md-6.form-group

@@ -21,6 +21,10 @@ const ArticleSchema = new mongoose.Schema(
       required: true,
       minlength: 32
     },
+    image: {
+      type: String,
+      default: 'https://habiiev-wordify.s3.eu-north-1.amazonaws.com/articles/default.jpg'
+    },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   },
   { timestamps: true }

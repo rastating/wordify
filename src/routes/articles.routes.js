@@ -13,6 +13,7 @@ router
   .get(authMiddleware.ensureAuthenticated, controller.createArticleForm)
   .post(
     authMiddleware.ensureAuthenticated,
+    controller.uploadImage,
     autoSanitizer.routeUnsafe,
     controller.validateArticle,
     controller.createArticle
