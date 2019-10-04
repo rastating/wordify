@@ -24,9 +24,9 @@ block body
                 .col-md-4.col-sm-12
                   span.row
                     a(href="/a/" + article.slug + '/edit').col-sm-6.btn.btn-link Edit
-                    form(action="/a/" + article.slug + "?_method=DELETE", method="post").col-sm-6.row
+                    form(action="/a/" + article.slug + "?_method=DELETE", method="post").col-sm-6
                       input(type="hidden" name="_method" value="DELETE")
-                      input(type="submit", value="Delete").btn.btn-link.col-sm-12
+                      input(type="submit", value="Delete").btn.btn-link.btn-block
           
           h1.mb-4= article.title
 
