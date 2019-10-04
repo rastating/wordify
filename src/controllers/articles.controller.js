@@ -10,7 +10,6 @@ exports.preLoadArticle = (req, res, next, slug) => {
   Article.findOne({ slug })
     .populate('author')
     .then(article => {
-      console.log(!article);
       if (!article) {
         const error = new Error('Article was not found');
         error.status = 404;

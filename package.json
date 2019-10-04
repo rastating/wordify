@@ -11,7 +11,7 @@
     "url": "https://github.com/habiiev/express-blog.git"
   },
   "scripts": {
-    "start": "pm2-runtime start ecosystem.config.json --env production",
+    "start": "pm2-runtime start ecosystem.config.js --env production",
     "start:dev": "nodemon ."
   },
   "dependencies": {
