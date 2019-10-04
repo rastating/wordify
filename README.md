@@ -24,6 +24,7 @@
 - [Bcryptjs](https://www.npmjs.com/package/bcryptjs) - library for hashing passwords
 - [Passport](https://www.npmjs.com/package/passport) - authentication middleware for node.js
 - [Passport-local](https://www.npmjs.com/package/passport-local) - passport strategy for authentication using username and password
+- [PM2](https://www.npmjs.com/package/pm2) - production process manager with load balancer
 
 **Development**:
 
