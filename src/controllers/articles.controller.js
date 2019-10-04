@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const { check, validationResult } = require('express-validator');
 
+const upload = require('../utils/awsUpload');
 const mongooseError = require('../utils/mongooseErrorHandler');
 
 const Article = mongoose.model('Article');
@@ -22,6 +23,14 @@ exports.preLoadArticle = (req, res, next, slug) => {
     .catch(err => {
       next(new Error(err));
     });
+};
+
+exports.uploadImage = (req, res, next) => {
+  upload.single('image')(req, res, err => {
+    if (err) req.fileError = err;
+
+    next();
+  });
 };
 
 // Article validation middleware
@@ -55,19 +64,27 @@ exports.createArticleForm = (req, res) => {
 exports.createArticle = (req, res, next) => {
   // Get validation errors after express-validator validation
   const errors = validationResult(req);
-  if (!errors.isEmpty())
+  if (!errors.isEmpty() || req.fileError)
     // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
     return res.render('articles/create', {
       title: 'New Article',
-      errors: errors.errors.reduce((r, value) => {
-        r[value.param] = value.msg;
-        return r;
-      }, {}),
+      errors: {
+        ...errors.errors.reduce((r, value) => {
+          r[value.param] = value.msg;
+          return r;
+        }, {}),
+        file: req.fileError
+      },
       articleTitle: req.body.title,
       articleContent: req.body.content
     });
 
-  Article.create({ title: req.body.title, content: req.body.content, author: req.user })
+  Article.create({
+    title: req.body.title,
+    content: req.body.content,
+    image: req.file ? req.file.location : undefined,
+    author: req.user
+  })
     .then(article => {
       req.flash('info', 'Article created!');
       res.redirect(`/a/${article.slug}`);

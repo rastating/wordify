@@ -35,5 +35,6 @@ module.exports = {
   sessionSecret: SESSIONSECRET,
   s3KeyId: AWS_S3_ACCESS_KEY_ID,
   s3AccessKey: AWS_S3_ACCESS_KEY,
-  s3Region: AWS_S3_REGION
+  s3Region: AWS_S3_REGION,
+  s3Bucket: AWS_S3_BUCKET
 };

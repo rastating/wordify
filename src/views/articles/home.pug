@@ -18,7 +18,7 @@ block body
               - var date = new Date(article.createdAt)
               .col-md-6
                 a(href="/a/" + article.slug, data-animate-effect="fadeIn").blog-entry.element-animate
-                  img(src="#", alt="Image placeholder")
+                  img(src=article.image, alt="Image placeholder")
                   .blog-content-body
                     .post-meta
                       span.author.mr-2
