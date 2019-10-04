@@ -25,6 +25,9 @@
 - [Passport](https://www.npmjs.com/package/passport) - authentication middleware for node.js
 - [Passport-local](https://www.npmjs.com/package/passport-local) - passport strategy for authentication using username and password
 - [PM2](https://www.npmjs.com/package/pm2) - production process manager with load balancer
+- [Multer](https://www.npmjs.com/package/multer) - node.js middleware for handling multipart/form-data
+- [Multer-S3](https://www.npmjs.com/package/multer-s3) - multer storage engine for AWS S3
+- [AWS-SDK](https://www.npmjs.com/package/aws-sdk) - official AWS SDK
 
 **Development**:
 
