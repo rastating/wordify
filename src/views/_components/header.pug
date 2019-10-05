@@ -9,10 +9,10 @@ header(role="banner")
             span.fa.fa-linkedin-square
         
         .col-3.search-top
-          form(action="#").search-top-form
+          form(action="/", method="get").search-top-form
             span.icon.fa.fa-search
-            input(type="text", placeholder="Search articles...")#s
-  
+            input(type="text", placeholder="Search articles...", name="s")#s
+
   .container.logo-wrap
     .row.pt-5
       .col-12.text-center

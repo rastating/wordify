@@ -14,7 +14,9 @@ const ArticleSchema = new mongoose.Schema(
       type: String,
       minlength: 10,
       maxlength: 128,
-      required: true
+      required: true,
+      index: true,
+      text: true
     },
     content: {
       type: String,
@@ -29,6 +31,8 @@ const ArticleSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+ArticleSchema.index({ title: 'text' });
 
 ArticleSchema.methods.slugify = function() {
   this.slug = `${Math.floor(Math.random() * 36 ** 6 || 0).toString()}-${slug(this.title)}`;

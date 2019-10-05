@@ -52,13 +52,19 @@ exports.getAllArticles = async (req, res, next) => {
     const page = parseInt(req.query.p, 10) || 1;
     const articlesPerPage = 10;
 
-    const articles = await Article.find({})
+    const searchQuery = req.query.s
+      ? {
+          $text: { $search: req.query.s }
+        }
+      : {};
+
+    const articles = await Article.find(searchQuery)
       .populate('author')
       .sort('-createdAt')
       .skip((page - 1) * articlesPerPage)
       .limit(articlesPerPage);
 
-    const articleCount = await Article.count();
+    const articleCount = await Article.countDocuments();
 
     res.render('articles/home', {
       articles,
