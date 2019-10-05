@@ -2,6 +2,8 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
+const config = require('../config');
+
 const UserSchema = new mongoose.Schema(
   {
     username: {
@@ -25,7 +27,7 @@ const UserSchema = new mongoose.Schema(
     },
     avatar: {
       type: String,
-      default: 'https://habiiev-wordify.s3.eu-north-1.amazonaws.com/user.png'
+      default: `https://${config.s3Bucket}.s3.${config.s3Region}.amazonaws.com/user.png`
     },
     password: {
       type: String,

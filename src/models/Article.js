@@ -2,6 +2,8 @@ const slug = require('slug');
 const mongoose = require('mongoose');
 const uniqueValidator = require('mongoose-unique-validator');
 
+const config = require('../config');
+
 const ArticleSchema = new mongoose.Schema(
   {
     slug: {
@@ -25,7 +27,7 @@ const ArticleSchema = new mongoose.Schema(
     },
     image: {
       type: String,
-      default: 'https://habiiev-wordify.s3.eu-north-1.amazonaws.com/articles/default.jpg'
+      default: `https://${config.s3Bucket}.s3.${config.s3Region}.amazonaws.com/default.jpg`
     },
     author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
   },
