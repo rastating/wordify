@@ -23,6 +23,10 @@ const UserSchema = new mongoose.Schema(
       type: String,
       minlength: 16
     },
+    avatar: {
+      type: String,
+      default: 'https://habiiev-wordify.s3.eu-north-1.amazonaws.com/user.png'
+    },
     password: {
       type: String,
       required: [true, "can't be blank"],

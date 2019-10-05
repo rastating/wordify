@@ -1,0 +1,53 @@
+extends ../_layout.pug
+
+block body
+  .container
+    .row.mb-4
+      .col-md-6
+        h2 Update Profile
+    
+    .row.blog-entries
+      .col-md-12.col-lg-8.main-content
+        form(method="post", action="/profile/update")
+          .row
+            .col-md-12.form-group
+              label(for="username") Username
+              input(type="text", name="username", value=user.username)#username.form-control
+              
+              if errors && errors.username
+                small= errors.username
+
+            .col-md-12.form-group
+              label(for="Email") Email
+              input(type="email", name="email", value=user.email)#email.form-control
+              
+              if errors && errors.email
+                small= errors.email
+            
+            .col-md-12.form-group
+              label(for="bio") Bio
+              textarea(name="bio", cols="30", rows="20")#bio.form-control= user.bio
+              
+              if errors && errors.bio
+                small= errors.bio
+
+          .row
+            .col-md-6.form-group
+              input(type="submit", value="Update").btn.btn-primary
+
+
+        h2.mt-5 Profile picture
+        form(method="post", action="/profile/update/avatar", enctype="multipart/form-data")
+          .row
+            .col-md-12.form-group
+              input(type="file", name="avatar").form-control
+
+              if errors && errors.file
+                small= errors.file
+
+          .row
+            .col-md-6.form-group
+              input(type="submit", value="Upload image").btn.btn-primary
+
+
+      include ../_components/sidebar

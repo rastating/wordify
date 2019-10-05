@@ -9,7 +9,7 @@ block body
             .row
               .col-md-8.col-sm-12
                 span.author.mr-2
-                  img(src="#", alt="Author image").mr-2
+                  img(src=article.author.avatar, alt="Author image").mr-2
                   | #{article.author.username} &bullet;
 
                 span.mr-2= new Date(article.createdAt).toDateString()
@@ -39,17 +39,17 @@ block body
             p Categories: #[a(href="#") Food] &nbsp; Tags: #[a(href="#") #manilla]
           
           .pt-5
-            h3.mb-5 3 Comments
-            ul.comment-list
-              li.comment
-                .vcard
-                  img(src="#")
-                .comment-body
-                  h3 Jean Doe
+            //- h3.mb-5 3 Comments
+            //- ul.comment-list
+            //-   li.comment
+            //-     .vcard
+            //-       img(src="#")
+            //-     .comment-body
+            //-       h3 Jean Doe
                   
-                  .meta January 9, 2018 at 2:21pm
+            //-       .meta January 9, 2018 at 2:21pm
                   
-                  p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, modi temporibus facere minima quis voluptas velit iusto, officiis at illum culpa aliquam dolore itaque magni adipisci sint. Velit, doloribus nam.
+            //-       p Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem, modi temporibus facere minima quis voluptas velit iusto, officiis at illum culpa aliquam dolore itaque magni adipisci sint. Velit, doloribus nam.
 
                   //- p
                   //-   a(href="#").reply.rounded Reply
