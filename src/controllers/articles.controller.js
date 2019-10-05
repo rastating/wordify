@@ -47,12 +47,28 @@ exports.validateArticle = [
 ];
 
 // Return home page with all of the articles
-exports.getAllArticles = (req, res, next) => {
-  Article.find({})
-    .populate('author')
-    .sort('-createdAt')
-    .then(articles => res.render('articles/home', { articles, empty: !(Array.isArray(articles) && articles.length) }))
-    .catch(next);
+exports.getAllArticles = async (req, res, next) => {
+  try {
+    const page = parseInt(req.query.p, 10) || 1;
+    const articlesPerPage = 10;
+
+    const articles = await Article.find({})
+      .populate('author')
+      .sort('-createdAt')
+      .skip((page - 1) * articlesPerPage)
+      .limit(articlesPerPage);
+
+    const articleCount = await Article.count();
+
+    res.render('articles/home', {
+      articles,
+      page,
+      numPages: Math.ceil(articleCount / articlesPerPage),
+      empty: !(Array.isArray(articles) && articles.length)
+    });
+  } catch (err) {
+    next(new Error(err));
+  }
 };
 
 // Render create article form

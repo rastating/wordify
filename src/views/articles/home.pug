@@ -4,8 +4,11 @@ block body
   .container
     if empty
       .row
-        .col-md-6
-            h2.mb-4 Not posts available
+        .col-md-12.col-lg-8.main-content.text-center
+          h1.mb-4 No posts available
+
+        include ../_components/sidebar
+          
     else
       .row
         .col-md-6
@@ -39,21 +42,36 @@ block body
             .col-md-12.text-center
               nav(aria-label="Page navigation").text-center
                 ul.pagination
-                  li.page-item.active
-                    a(href="#").page-link &lt;
-                  
-                  li.page-item
-                    a(href="#").page-link 1
-                  li.page-item
-                    a(href="#").page-link 2
-                  li.page-item
-                    a(href="#").page-link 3
-                  li.page-item
-                    a(href="#").page-link 4
-                  li.page-item
-                    a(href="#").page-link 5
+                  if page > 1
+                    li.page-item
+                      a(href="?p=" + (page - 1)).page-link &lt;
+                    
+                    if page > 2
+                      li.page-item
+                        a(href="?p=1").page-link 1
 
-                  li.page-item
-                    a(href="#").page-link &gt;
+                      if page > 3
+                        li.page-item &nbsp;...&nbsp;
+
+                    li.page-item
+                      a(href="?p=" + (page - 1)).page-link= (page - 1)
+
+
+                  li.page-item.active
+                    a(href="#").page-link= page
+
+                  if page < numPages
+                    li.page-item
+                      a(href="?p=" + (page + 1)).page-link= (page + 1)
+
+                    if (page + 1) < numPages
+                      if page + 2 < numPages
+                        li.page-item &nbsp;...&nbsp;
+
+                      li.page-item
+                        a(href="?p=" + numPages).page-link= numPages
+
+                    li.page-item
+                      a(href="?p=" + (page + 1)).page-link &gt;
 
         include ../_components/sidebar
