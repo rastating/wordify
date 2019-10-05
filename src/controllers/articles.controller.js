@@ -145,16 +145,21 @@ exports.editArticle = (req, res, next) => {
   req.article.title = req.body.title;
   req.article.content = req.body.content;
 
+  if (req.file) req.article.image = req.file.location;
+
   // Get validation errors after express-validator validation
   const errors = validationResult(req);
-  if (!errors.isEmpty())
+  if (!errors.isEmpty() || req.fileError)
     // Return the `create` view with errors mapped to an object of type { 'field name': 'error message' }
     return res.render('articles/edit', {
       title: `Edit Article: ${req.article.title}`,
-      errors: errors.errors.reduce((r, value) => {
-        r[value.param] = value.msg;
-        return r;
-      }, {}),
+      errors: {
+        ...errors.errors.reduce((r, value) => {
+          r[value.param] = value.msg;
+          return r;
+        }, {}),
+        file: req.fileError
+      },
       article: req.article
     });
 

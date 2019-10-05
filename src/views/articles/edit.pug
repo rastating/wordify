@@ -8,7 +8,7 @@ block body
     
     .row.blog-entries
       .col-md-12.col-lg-8.main-content
-        form(action="/a/" + article.slug + "/edit?_method=PUT", method="post")
+        form(action="/a/" + article.slug + "/edit?_method=PUT", method="post", enctype="multipart/form-data")
           input(type="hidden", name="_method", value="PUT")
 
           .row
@@ -26,6 +26,14 @@ block body
               
               if errors && errors.content
                 small= errors.content
+
+          .row
+            .col-md-12.form-group
+              label(for="image") Image&nbsp;
+              input(type="file", name="image").form-control
+
+              if errors && errors.file
+                small= errors.file
 
           .row
             .col-md-6.form-group

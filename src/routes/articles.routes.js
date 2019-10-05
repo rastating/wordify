@@ -29,6 +29,7 @@ router
   .get(authMiddleware.ensureAuthenticated, controller.editArticleForm)
   .put(
     authMiddleware.ensureAuthenticated,
+    controller.uploadImage,
     autoSanitizer.routeUnsafe,
     controller.validateArticle,
     controller.editArticle
