@@ -32,10 +32,23 @@ passportConfig(passport);
 app.use(passport.initialize());
 app.use(passport.session());
 
+const Article = mongoose.model('Article');
+
 // Set global variable on response object to true if user is logged in
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
   res.locals.authenticated = req.isAuthenticated();
   res.locals.user = req.user;
+
+  // Load 3 latest articles for footer for every request
+  // TODO: Add caching functionality
+  try {
+    res.locals.footerArticles = await Article.find({})
+      .sort('-createdAt')
+      .limit(3);
+  } catch (err) {
+    return next(new Error(err));
+  }
+
   next();
 });
 

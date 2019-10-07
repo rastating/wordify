@@ -9,6 +9,20 @@ footer.site-footer
         .row
           .col-md-7
             h3 Latest Posts
+            .post-entry-sidebar
+              ul
+                each a in footerArticles
+                  li
+                    a(href="/a/" + a.slug)
+                      img(src=a.image, alt="Image placeholder").mr-4
+                      .text
+                        h4= a.title
+                        .post-meta
+                          span.mr-2= new Date(a.createdAt).toDateString()
+                          | &bullet;
+                          span.ml-2
+                            span.fa.fa-comments &nbsp;
+                            | 3
 
           .col-md-4
             .mb-5
