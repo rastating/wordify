@@ -21,4 +21,10 @@ router
 
 router.route('/logout').get(authMiddleware.ensureAuthenticated, controller.logoutUser);
 
+router
+  .route('/email/resend')
+  .get(authMiddleware.ensureAuthenticated, authMiddleware.emailNotVerified, controller.resendEmail);
+
+router.route('/email/:token').get(controller.verifyEmail);
+
 module.exports = router;

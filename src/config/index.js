@@ -7,6 +7,7 @@ const dotenv = require('dotenv');
 dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
 const {
+  DOMAIN_NAME,
   NODE_ENV,
   PORT,
   MONGO,
@@ -21,6 +22,7 @@ const {
 
 // Check for required environment variables
 assert(NODE_ENV, 'NODE_ENV environment variable is required');
+assert(DOMAIN_NAME, 'DOMAIN_NAME environment variable is required');
 
 assert(MONGO, 'MongoDB Connection string in MONGO environment variable is required');
 assert(SESSIONSECRET, 'SESSIONSECRET environment variable is required');
@@ -35,6 +37,7 @@ assert(SENDGRID_FROM_ADDRESS, 'SENDGRID_FROM_ADDRESS environment variable is req
 
 module.exports = {
   env: NODE_ENV,
+  domain: DOMAIN_NAME,
   port: PORT || 5500,
   dbUrl: MONGO,
   sessionSecret: SESSIONSECRET,

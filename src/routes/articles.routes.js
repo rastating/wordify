@@ -10,9 +10,10 @@ router.route('/').get(controller.getAllArticles);
 
 router
   .route('/create')
-  .get(authMiddleware.ensureAuthenticated, controller.createArticleForm)
+  .get(authMiddleware.ensureAuthenticated, authMiddleware.emailVerified, controller.createArticleForm)
   .post(
     authMiddleware.ensureAuthenticated,
+    authMiddleware.emailVerified,
     controller.uploadImage,
     autoSanitizer.routeUnsafe,
     controller.validateArticle,
@@ -22,13 +23,14 @@ router
 router
   .route('/a/:articleSlug')
   .get(controller.getArticle)
-  .delete(authMiddleware.ensureAuthenticated, controller.deleteArticle);
+  .delete(authMiddleware.ensureAuthenticated, authMiddleware.emailVerified, controller.deleteArticle);
 
 router
   .route('/a/:articleSlug/edit')
-  .get(authMiddleware.ensureAuthenticated, controller.editArticleForm)
+  .get(authMiddleware.ensureAuthenticated, authMiddleware.emailVerified, controller.editArticleForm)
   .put(
     authMiddleware.ensureAuthenticated,
+    authMiddleware.emailVerified,
     controller.uploadImage,
     autoSanitizer.routeUnsafe,
     controller.validateArticle,

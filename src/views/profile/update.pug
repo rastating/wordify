@@ -23,7 +23,12 @@ block body
               
               if errors && errors.email
                 small= errors.email
-            
+
+              small Email status: #{user.emailConfirmed ? 'Confirmed' : 'Not confirmed'}
+              if !user.emailConfirmed
+                br
+                a(href="/auth/email/resend") Resend verification email?
+
             .col-md-12.form-group
               label(for="bio") Bio
               textarea(name="bio", cols="30", rows="20")#bio.form-control= user.bio

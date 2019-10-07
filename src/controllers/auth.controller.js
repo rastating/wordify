@@ -2,9 +2,12 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const { check, validationResult } = require('express-validator');
 
+const config = require('../config');
+const sendEmail = require('../utils/sendEmail');
 const mongooseError = require('../utils/mongooseErrorHandler');
 
 const User = mongoose.model('User');
+const EmailConfirmationToken = mongoose.model('EmailConfirmationToken');
 
 // User validation middleware
 exports.validateUser = [
@@ -60,9 +63,18 @@ exports.createUser = (req, res, next) => {
     });
 
   User.create({ username: req.body.username, email: req.body.email, password: req.body.password })
-    .then(() => {
-      req.flash('info', 'You are registered. You can login now!');
-      res.redirect('/auth/login');
+    .then(user => {
+      EmailConfirmationToken.create({ user }).then(token => {
+        sendEmail(
+          user.email,
+          'Please verify your email',
+          `Please follow this link to verify your email: ${config.domain}/auth/email/${token.id}`,
+          `Please follow this <a href="${config.domain}/auth/email/${token.id}">link to verify your email</a><br>If you cannot see the link, click here: ${config.domain}/auth/email/${token.id}`
+        );
+
+        req.flash('info', 'You are registered. You have to verify your email before you can login');
+        res.redirect('/auth/login');
+      });
     })
     .catch(err =>
       mongooseError(err, next, mErrors =>
@@ -96,4 +108,56 @@ exports.logoutUser = (req, res) => {
   req.logout();
   req.flash('info', 'You have been logged out');
   res.redirect('/');
+};
+
+// Verify email by token
+exports.verifyEmail = (req, res, next) => {
+  // Get token by id from params
+  EmailConfirmationToken.findById(req.params.token)
+    .then(token => {
+      if (!token) {
+        const err = new Error('Invalid token');
+        err.status = 404;
+        return next(err);
+      }
+      // Find user by user id from token
+      User.findById(token.user).then(user => {
+        user.emailConfirmed = true;
+        user.save();
+        token.remove();
+        req.flash('info', 'Email has been successfully confirmed!');
+        res.redirect('/');
+      });
+    })
+    .catch(err => next(new Error(err)));
+};
+
+exports.resendEmail = (req, res, next) => {
+  EmailConfirmationToken.findOne({ user: req.user })
+    .then(token => {
+      if (!token) {
+        EmailConfirmationToken.create({ user: req.user }).then(t => {
+          sendEmail(
+            req.user.email,
+            'Please verify your email',
+            `Please follow this link to verify your email: ${config.domain}/auth/email/${t.id}`,
+            `Please follow this <a href="${config.domain}/auth/email/${t.id}">link to verify your email</a><br>If you cannot see the link, click here: ${config.domain}/auth/email/${t.id}`
+          );
+
+          req.flash('info', 'Email verification token has been resent. Please check your email');
+          return res.redirect('/profile/update');
+        });
+      }
+
+      sendEmail(
+        req.user.email,
+        'Please verify your email',
+        `Please follow this link to verify your email: ${config.domain}/auth/email/${token.id}`,
+        `Please follow this <a href="${config.domain}/auth/email/${token.id}">link to verify your email</a><br>If you cannot see the link, click here: ${config.domain}/auth/email/${token.id}`
+      );
+
+      req.flash('info', 'Email verification token has been resent. Please check your email');
+      res.redirect('/profile/update');
+    })
+    .catch(err => next(new Error(err)));
 };

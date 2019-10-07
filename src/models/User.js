@@ -21,6 +21,10 @@ const UserSchema = new mongoose.Schema(
       unique: true,
       match: [/\S+@\S+\.\S+/, 'is invalid']
     },
+    emailConfirmed: {
+      type: Boolean,
+      default: false
+    },
     bio: {
       type: String,
       minlength: 16

@@ -57,13 +57,13 @@
 
 5. Seed the database:
 
-`yarn seed` or `npm run seed`
+   `yarn seed` or `npm run seed`
 
-5. Start the development server:
+6. Start the development server:
 
    `yarn start:dev` or `npm run start:dev`
 
-6. Open `http://localhost:5500` in browser
+7. Open `http://localhost:5500` in browser
 
 ## Deploying to Heroku
 
