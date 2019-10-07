@@ -54,6 +54,10 @@
 
 4. Fill in the `.env` file
 
+5. Seed the database:
+
+`yarn seed` or `npm run seed`
+
 5. Start the development server:
 
    `yarn start:dev` or `npm run start:dev`

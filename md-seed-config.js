@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
-const mongoURL = process.env.MONGO || 'mongodb://localhost:27017/wordify';
+const config = require('./src/config');
+
+const mongoURL = config.dbUrl;
 
 const Users = require('./src/seeders/users.seeder');
 const Articles = require('./src/seeders/articles.seeder');
