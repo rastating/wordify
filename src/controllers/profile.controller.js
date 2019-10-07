@@ -9,8 +9,8 @@ const User = mongoose.model('User');
 exports.validateProfile = [
   check('username')
     .trim()
-    .isLength(5, 32)
-    .withMessage('Username must be between 5 and 32 characters long')
+    .isLength(3, 32)
+    .withMessage('Username must be between 3 and 32 characters long')
     .matches(/^[a-zA-Z0-9_]+$/)
     .withMessage('Username must contain only letters numbers and underscores')
     .custom((value, { req }) =>

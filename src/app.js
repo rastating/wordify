@@ -34,7 +34,7 @@ app.use(passport.session());
 
 const Article = mongoose.model('Article');
 
-// Set global variable on response object to true if user is logged in
+// Set global variables on response object
 app.use(async (req, res, next) => {
   res.locals.authenticated = req.isAuthenticated();
   res.locals.user = req.user;

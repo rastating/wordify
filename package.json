@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "pm2-runtime start ecosystem.config.js --env production",
-    "start:dev": "nodemon ."
+    "start:dev": "nodemon .",
+    "seed": "node ./node_modules/mongoose-data-seed/md-seed.js run -d"
   },
   "dependencies": {
     "aws-sdk": "^2.542.0",
@@ -25,8 +26,10 @@
     "express-flash": "^0.0.2",
     "express-session": "^1.16.2",
     "express-validator": "^6.2.0",
+    "faker": "^4.1.0",
     "method-override": "^3.0.0",
     "mongoose": "^5.7.1",
+    "mongoose-data-seed": "^2.1.4",
     "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "multer": "^1.4.2",
@@ -48,5 +51,8 @@
     "eslint-plugin-react-hooks": "1.7.0",
     "nodemon": "^1.19.2",
     "prettier": "^1.18.2"
+  },
+  "mdSeed": {
+    "seedersFolder": "./src/seeders"
   }
 }

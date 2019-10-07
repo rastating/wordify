@@ -10,7 +10,7 @@ const UserSchema = new mongoose.Schema(
       type: String,
       required: [true, "can't be blank"],
       unique: true,
-      minlength: 5,
+      minlength: 3,
       maxlength: 32,
       index: true,
       match: [/^[a-zA-Z0-9_]+$/, 'is invalid']
@@ -54,4 +54,4 @@ UserSchema.pre('save', function(next) {
 
 UserSchema.plugin(uniqueValidator, { message: 'is already taken' });
 
-mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);

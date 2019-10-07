@@ -29,7 +29,7 @@ const ArticleSchema = new mongoose.Schema(
       type: String,
       default: `https://${config.s3Bucket}.s3.${config.s3Region}.amazonaws.com/default.jpg`
     },
-    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' }
+    author: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true }
   },
   { timestamps: true }
 );
@@ -47,4 +47,4 @@ ArticleSchema.pre('validate', function(next) {
   next();
 });
 
-mongoose.model('Article', ArticleSchema);
+module.exports = mongoose.model('Article', ArticleSchema);

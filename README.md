@@ -28,6 +28,8 @@
 - [Multer](https://www.npmjs.com/package/multer) - node.js middleware for handling multipart/form-data
 - [Multer-S3](https://www.npmjs.com/package/multer-s3) - multer storage engine for AWS S3
 - [AWS-SDK](https://www.npmjs.com/package/aws-sdk) - official AWS SDK
+- [Mongoose-data-seed](https://www.npmjs.com/package/mongoose-data-seed) - seed mongodb database using mongoose models
+- [Faker](https://www.npmjs.com/package/faker) - package for generating fake data
 
 **Development**:
 
