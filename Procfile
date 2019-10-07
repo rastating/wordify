@@ -1,1 +1,1 @@
-web: yarn pm2
+web: yarn start
