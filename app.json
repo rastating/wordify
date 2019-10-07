@@ -18,11 +18,12 @@
     "aws",
     "s3",
     "multer",
-    "sengrid",
+    "sendgrid",
     "pm2"
   ],
   "env": {
     "NODE_ENV": { "value": "production" },
+    "DOMAIN_NAME": { "value": "" },
     "MONGO": { "value": "" },
     "SESSIONSECRET": { "generator": "secret" },
     "AWS_S3_ACCESS_KEY_ID": { "value": "" },

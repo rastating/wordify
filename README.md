@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://i.imgur.com/KSugaI9.png" alt="Wordify logo" height="100" width="400">
+  <img src="https://i.imgur.com/KSugaI9.png" alt="Wordify logo" height="100">
 
   <p>A simple small blog application built using Node / Express / MongoDB</p>
   <p><a href="https://habiiev-wordify.herokuapp.com/" target="_blank">Visit the website &rarr;</a></p>
@@ -44,11 +44,11 @@
 
 1. Pull the repo from git:
 
-   `git pull https://github.com/habiiev/express-blog`
+   `git pull https://github.com/habiiev/wordify`
 
-2. `cd` to the folder you pulled the repo in (by default `express-blog`):
+2. `cd` to the folder you pulled the repo in (by default `wordify`):
 
-   `cd express-blog`
+   `cd wordify`
 
 3. Install the dependencies:
 
