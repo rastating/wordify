@@ -30,6 +30,7 @@
 - [AWS-SDK](https://www.npmjs.com/package/aws-sdk) - official AWS SDK
 - [Mongoose-data-seed](https://www.npmjs.com/package/mongoose-data-seed) - seed mongodb database using mongoose models
 - [Faker](https://www.npmjs.com/package/faker) - package for generating fake data
+- [@sendgrid/mail](https://www.npmjs.com/package/@sendgrid/mail) - service that is a part of [sendgrid](https://www.npmjs.com/package/sendgrid) that is dedicated for sending mail only using Sendgrid API
 
 **Development**:
 
