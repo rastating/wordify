@@ -42,11 +42,11 @@
 
 ## Starting in a development environment
 
-1. Pull the repo from git:
+1. Clone the repo from git:
 
-   `git pull https://github.com/habiiev/wordify`
+   `git clone https://github.com/habiiev/wordify`
 
-2. `cd` to the folder you pulled the repo in (by default `wordify`):
+2. `cd` to the folder you cloned the repo in (by default `wordify`):
 
    `cd wordify`
 
