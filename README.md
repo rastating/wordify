@@ -2,6 +2,7 @@
   <img src="https://i.imgur.com/KSugaI9.png" alt="Wordify logo" height="100" width="400">
 
   <p>A simple small blog application built using Node / Express / MongoDB</p>
+  <p><a href="https://habiiev-wordify.herokuapp.com/" target="_blank">Visit the website &rarr;</a></p>
 </div>
 
 ---
