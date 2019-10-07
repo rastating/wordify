@@ -1,6 +1,6 @@
 {
   "name": "wordify",
-  "version": "0.1.1",
+  "version": "0.7.0",
   "description": "A simple small blog application built using Node / Express / MongoDB",
   "main": "src/index.js",
   "author": "Oleksii Habiiev <oleksii.habiiev@gmail.com>",

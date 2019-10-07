@@ -17,15 +17,19 @@
     "wordify",
     "aws",
     "s3",
-    "multer"
+    "multer",
+    "sengrid",
+    "pm2"
   ],
   "env": {
     "NODE_ENV": { "value": "production" },
     "MONGO": { "value": "" },
     "SESSIONSECRET": { "generator": "secret" },
-    "AWS_S3_ACCESS_KEY_ID": { value: "" },
-    "AWS_S3_ACCESS_KEY": { value: "" },
-    "AWS_S3_REGION": { value: "" },
-    "AWS_S3_BUCKET": { value: "" }
+    "AWS_S3_ACCESS_KEY_ID": { "value": "" },
+    "AWS_S3_ACCESS_KEY": { "value": "" },
+    "AWS_S3_REGION": { "value": "" },
+    "AWS_S3_BUCKET": { "value": "" },
+    "SENDGRID_API_KEY": { "value": "" },
+    "SENDGRID_FROM_ADDRESS": { "value": "" }
   }
 }
